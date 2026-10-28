@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как всё будет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f5f4f0; --ink:#17201e; --body:#38433f; --muted:#69736f; --line:#e0e2dc; --card:#fff; --accent:#2a8371; --warn:#8a5a00; --warn-bg:#fcf1d8; --mail:#f7f9fa; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--body); font:16px/1.55 Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:860px; margin:0 auto; padding:36px 16px 80px; }
+  h1 { font-size:34px; line-height:1.12; letter-spacing:-.6px; color:var(--ink); margin:0 0 10px; }
+  .lead { font-size:18px; color:var(--body); margin:0 0 8px; max-width:680px; }
+  .why { margin:28px 0 8px; padding:18px 20px; background:var(--card); border:1px solid var(--line); border-radius:14px; }
+  .why h2 { margin-top:0; }
+  h2 { font-size:22px; color:var(--ink); margin:44px 0 10px; letter-spacing:-.3px; }
+  h3 { font-size:16px; color:var(--ink); margin:22px 0 6px; }
+  ol.steps { list-style:none; padding:0; margin:0; counter-reset:s; }
+  ol.steps > li { counter-increment:s; position:relative; padding:0 0 26px 54px; border-left:2px solid var(--line); margin-left:18px; }
+  ol.steps > li:last-child { border-left-color:transparent; }
+  ol.steps > li::before { content:counter(s); position:absolute; left:-19px; top:-2px; width:36px; height:36px; border-radius:50%; background:var(--ink); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .when { font-size:13px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:.4px; }
+  .step-t { font-size:18px; font-weight:600; color:var(--ink); margin:2px 0 6px; }
+  p { margin:0 0 10px; }
+  .mail { background:var(--mail); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:10px 0; font-family:"Source Serif 4", Georgia, serif; font-size:16px; color:var(--ink); }
+  .mail .meta { font-family:Geist, sans-serif; font-size:13px; color:var(--muted); margin-bottom:8px; }
+  .mail .meta b { color:var(--ink); font-weight:600; }
+  .mail .stars { color:#f2b01e; font-size:24px; letter-spacing:4px; margin:6px 0; }
+  .mail .btns { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; }
+  .mail .btns span { font-family:Geist, sans-serif; font-size:13px; font-weight:600; background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px; }
+  .ru { font-family:Geist, sans-serif; font-size:13px; color:var(--muted); margin:-4px 0 10px; }
+  .why-line { font-size:14px; color:var(--muted); border-left:3px solid var(--accent); padding-left:10px; margin:8px 0 0; }
+  .decide { background:var(--warn-bg); border-radius:12px; padding:14px 16px; margin:12px 0; }
+  .decide b { color:var(--warn); }
+  table { width:100%; border-collapse:collapse; font-size:15px; margin:8px 0; background:var(--card); border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:13px; color:var(--muted); font-weight:600; background:#fafaf8; }
+  .task { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin:10px 0; }
+  .task b { color:var(--ink); }
+  .task ul { margin:6px 0 0; padding-left:20px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Как всё будет</h1>
+  <p class="lead">Еженедельный разговор эйчара с водителем. Пример на TLS: эйчар Hazel, водитель Marcus, диспетчер Kevin. У других компаний то же самое со своими именами, логотипом и картинками.</p>
+
+  <div class="why">
+    <h2>Почему водитель ответит</h2>
+    <p>Водитель не заполняет анкеты. Он отвечает человеку, который его нанял, если:</p>
+    <p>1. <b>Это занимает одно нажатие</b> прямо из письма, без входа и паролей.<br>
+    2. <b>Это про его деньги и его неделю</b>, а не «оцените качество сервиса».<br>
+    3. <b>Он видит, что после ответа что-то происходит</b>: на жалобу звонят на следующий день, а через неделю спрашивают, исправили ли.<br>
+    4. <b>Его не дёргают зря:</b> раз в неделю, в пятницу после расчёта, можно поставить на паузу.</p>
+    <p>А в Google он пишет, когда его об этом лично попросили в хороший момент, объяснили, зачем это нужно, и подсказали, что написать.</p>
+  </div>
+
+  <h2>Неделя водителя, шаг за шагом</h2>
+  <ol class="steps">
+    <li>
+      <div class="when">После первого груза</div>
+      <div class="step-t">Первое письмо: знакомство</div>
+      <p>Уходит в первую пятницу после того, как у машины появился первый груз в CargoETL. Если грузов не было, письма нет.</p>
+      <div class="mail">
+        <div class="meta">От: <b>Hazel at TLS</b> &lt;hr@tlslogistics.us&gt; · Тема: <b>Marcus, first week done</b></div>
+        Hi Marcus,<br><br>
+        Hazel here. I'm the one at TLS who looks after our drivers. You made it through your first week with us, so let me ask: how did it go?
+        <div class="stars">★★★★★</div>
+        If anything was off — a load, your dispatcher, your pay — tell me on the next screen and I'll sort it out. I'll check in like this every Friday, it takes a minute.<br><br>
+        Hazel · (267) 494-6323
+      </div>
+      <p class="ru">Привет, Маркус. Это Hazel, я в TLS отвечаю за водителей. Первая неделя позади, как прошла? Если что-то было не так — груз, диспетчер, оплата — скажи на следующем экране, разберусь. Буду так спрашивать каждую пятницу, это минута.</p>
+      <p class="why-line">Водитель с первого письма знает, кто ему пишет и зачем, и что это будет каждую неделю.</p>
+    </li>
+
+    <li>
+      <div class="when">Каждую пятницу, 16:00 по времени компании</div>
+      <div class="step-t">Письмо недели</div>
+      <p>Пятница, потому что в четверг-пятницу приходит расчёт и водитель подводит итог недели. Если за неделю у машины не было ни одного груза, письмо другое (шаг 3).</p>
+      <div class="mail">
+        <div class="meta">От: <b>Hazel at TLS</b> · Тема: <b>Marcus, how was the week?</b> (меняется: «Quick one, Marcus», «How'd the week go?»)</div>
+        Hey Marcus, quick one: how was this week?
+        <div class="stars">★★★★★</div>
+        Short settlement, a dispatcher who went quiet, too long sitting empty — if anything's off, tell me and I'll look into it.<br>
+        Rather say it just to me? Reply to this email.<br><br>
+        Hazel · Driver team, TLS
+        <div class="meta" style="margin-top:10px">You get this every Friday. Pause for a month</div>
+      </div>
+      <p class="ru">Маркус, коротко: как неделя? Расчёт меньше, диспетчер пропал, долго стоял пустой — если что-то не так, скажи, разберусь. Хочешь сказать только мне — ответь на это письмо.</p>
+      <p class="why-line">Одна строка и звёзды. Конкретные беды названы своими словами, чтобы было видно: спрашиваем всерьёз. «Ответь на письмо» — канал на случай, если не хочется, чтобы видел диспетчер.</p>
+    </li>
+
+    <li>
+      <div class="when">Если за неделю грузов не было</div>
+      <div class="step-t">Тихая неделя</div>
+      <div class="mail">
+        <div class="meta">Тема: <b>Marcus, quiet week?</b></div>
+        Hey Marcus, I see no loads on your truck this week. Everything okay?
+        <div class="btns"><span>Taking time off</span><span>Truck in the shop</span><span>Want more loads</span><span>Thinking of leaving</span></div>
+        Hazel
+      </div>
+      <p class="ru">Вижу, на этой неделе грузов не было. Всё в порядке? Отдыхаю / машина в ремонте / хочу больше грузов / думаю уйти.</p>
+      <p class="why-line">Простой — первый признак, что водитель уходит. «Хочу больше грузов» и «думаю уйти» сразу попадают эйчару в «Позвонить сегодня».</p>
+    </li>
+
+    <li>
+      <div class="when">Водитель нажал звезду</div>
+      <div class="step-t">Страница: оценка уже сохранена, ещё три нажатия</div>
+      <p>Звезда засчитана сразу, даже если водитель тут же закроет страницу. Дальше по одному нажатию на вопрос, каждый ответ сохраняется. Язык EN / ES / RU, страница запоминает выбор.</p>
+      <div class="mail">
+        Got your 4 stars, thanks Marcus. Three quick ones and you're done.<br><br>
+        <b>Kevin, your dispatcher, this week?</b> <span class="ru">Kevin sees your answer.</span>
+        <div class="btns"><span>Great</span><span>Okay</span><span>Not great</span></div>
+        <b>Did your settlement come in right?</b>
+        <div class="btns"><span>Yes</span><span>Almost</span><span>No</span></div>
+        <b>What would make next week better?</b>
+        <div class="btns"><span>Better rates</span><span>More loads</span><span>Less waiting</span><span>Faster pay</span><span>Home time</span><span>Paperwork help</span><span>The app</span><span>Nothing, keep it up</span></div>
+        <b>Anything else?</b> Only I read this. <span class="ru">(свободное поле видит только эйчар)</span>
+        <div class="btns"><span>Send to Hazel</span></div>
+      </div>
+      <p class="why-line">Вопросы про то, о чём водитель и так думает: деньги, грузы, ожидание, дом. Честно сказано, что Kevin увидит оценку, а для того, что не хочется говорить при диспетчере, есть поле только для эйчара.</p>
+    </li>
+
+    <li>
+      <div class="when">Неделя прошла плохо</div>
+      <div class="step-t">Эйчару сразу приходит сигнал, водителю звонят</div>
+      <p>Плохо — это 1–2 звезды, «Not great» про диспетчера, «No» про расчёт или «Thinking of leaving». Эйчару сразу уходит уведомление (письмо, позже Telegram), а водитель появляется в списке «Позвонить сегодня».</p>
+      <div class="mail">
+        Thanks for being straight with me, Marcus. I've got it, and I'll call you by tomorrow.<br>
+        Need it sorted today? Call me: (267) 494-6323
+      </div>
+      <p class="why-line">Обещание «позвоню до завтра» работает, только если эйчар правда звонит. Для этого список «Позвонить сегодня» и кнопка «Поговорили»; если за сутки не нажали, напоминание.</p>
+    </li>
+
+    <li>
+      <div class="when">Следующая пятница после жалобы</div>
+      <div class="step-t">Первым вопросом: «исправили?»</div>
+      <div class="mail">
+        Last week your settlement was short. Did we fix it?
+        <div class="btns"><span>Yes, fixed</span><span>Not yet</span></div>
+      </div>
+      <p class="why-line">Главное, ради чего водитель будет отвечать и дальше: он видит, что его услышали. «Not yet» снова поднимает его в «Позвонить сегодня» с пометкой «вторая неделя подряд».</p>
+    </li>
+
+    <li>
+      <div class="when">Неделя хорошая, водитель с нами 4+ недели</div>
+      <div class="step-t">Просьба про Google, один раз</div>
+      <div class="mail">
+        Glad it was a good week, Marcus.<br><br>
+        Can I ask a favor? Drivers look us up on Google before they call, and a few words from someone who actually runs loads with us mean more than anything we could write. Takes 30 seconds.
+        <div class="btns"><span>★★★★★ Rate TLS on Google</span></div>
+        Not sure what to say? Tap one to copy it:
+        <div class="btns"><span>Kevin always finds me loads</span><span>Paid right, every week</span><span>Good people to drive for</span></div>
+      </div>
+      <p class="ru">Можно попросить? Водители смотрят нас в Google перед звонком, и пара слов от того, кто реально у нас возит, значит больше, чем всё, что мы напишем сами. 30 секунд. Не знаешь, что написать — нажми, скопируется.</p>
+      <p class="why-line">Подсказки собираются из его же ответов: отметил диспетчера «Great» — первая подсказка про Kevin; расчёт «Yes» — про оплату. Нажал, текст скопировался, Google открылся сразу на звёздах, осталось вставить. Так пишут в разы чаще, чем в пустое поле. Просим один раз; если перешёл, больше не просим.</p>
+      <div class="decide"><b>Нужно твоё решение.</b> Google запрещает звать в отзывы только довольных (review gating): за это могут снять отзывы или пометить карточку. Сейчас так работает и прод (5 звёзд → Google), и этот шаг. Безопасный вариант: на четвёртой неделе просить всех одинаково, а довольным показывать подсказки. Довольные почти все пойдут, недовольным мы и так уже звоним.</div>
+    </li>
+
+    <li>
+      <div class="when">Понедельник, 9:00</div>
+      <div class="step-t">Сводка эйчару и диспетчерам</div>
+      <p>Эйчару: <a href="../hr/index.html">сводка недели</a> письмом и в разделе «Отзывы» — кому звонить, диспетчеры, что болит, исправилось ли, цитаты, Google.</p>
+      <p>Каждому диспетчеру своя короткая сводка: кто из водителей как его оценил за неделю, с именами (твоё решение). Свободный текст водителя диспетчер не видит.</p>
+      <div class="mail">
+        <div class="meta">Кому: Kevin Smith · Тема: <b>Your drivers this week: 9 great, 2 okay</b></div>
+        Andre B. — Great · Marcus H. — Okay · Sam K. — Great …
+      </div>
+    </li>
+
+    <li>
+      <div class="when">Если водитель молчит</div>
+      <div class="step-t">Не надоедать</div>
+      <p>Три недели без ответа — письмо раз в две недели. «Pause for a month» — месяц тишины. Машина больше не активна в портале — письма прекращаются.</p>
+    </li>
+  </ol>
+
+  <h2>Кто что видит</h2>
+  <table>
+    <tr><th></th><th>Звёзды и ответы</th><th>Свободный текст</th><th>Имя водителя</th></tr>
+    <tr><td><b>Эйчар</b></td><td>все</td><td>да</td><td>да</td></tr>
+    <tr><td><b>Диспетчер</b></td><td>только оценки себя</td><td>нет</td><td>да</td></tr>
+    <tr><td><b>Владелец компании</b></td><td>сводка эйчара</td><td>да</td><td>да</td></tr>
+  </table>
+
+  <h2>Что эйчару настраивать</h2>
+  <p>Ничего, кроме того, что уже есть в настройках отзывов: включено ли и в какое время слать. Имя в подписи и «От» — один раз при подключении (по умолчанию «Driver team»). Шаблон письма и картинки готовим мы.</p>
+
+  <h2>Задачи для Даниила</h2>
+  <div class="task"><b>1. HRP-1213 (уже заведена)</b> — HTML-шаблон письма компании, Google сразу в окно оценки, вид страницы, убрать «FREE Quick Pay».</div>
+  <div class="task"><b>2. Еженедельный опрос</b>
+    <ul><li>постоянная ссылка водителя, ответы по неделям, каждый ответ сохраняется по нажатию</li>
+    <li>пятничная отправка после расчёта; первое письмо после первого груза; «тихая неделя» без грузов</li>
+    <li>вопросы страницы, «исправили?» по прошлой жалобе, языки EN/ES/RU</li>
+    <li>имя отправителя, тема с вариантами, пауза на месяц, реже при молчании</li></ul></div>
+  <div class="task"><b>3. Эйчар и диспетчеры</b>
+    <ul><li>сигнал эйчару сразу при плохом ответе, «Позвонить сегодня», кнопка «Поговорили», напоминание через сутки</li>
+    <li>сводка в понедельник 9:00 письмом и в разделе «Отзывы»; сводка каждому диспетчеру</li>
+    <li>Google: один раз, подсказки из ответов водителя, учёт перехода</li></ul></div>
+</div>
+</body>
+</html>

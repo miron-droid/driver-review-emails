@@ -77,6 +77,8 @@
   .google p { margin:0 0 14px; font-size:15px; }
   .gbtn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px; border-radius:12px; background:#fff; border:1.5px solid var(--line); color:var(--ink); font-weight:600; font-size:16px; text-decoration:none; }
   .gbtn .g { color:var(--star); font-size:18px; letter-spacing:1px; }
+  .sugs { margin-top:8px; }
+  .sugs .opt { background:#fff; border:1.5px dashed var(--line); font-weight:500; }
   .gnote { margin:10px 0 0 !important; font-size:13px !important; color:var(--muted); text-align:center; }
   .call { margin-top:22px; font-size:15px; }
   .call a { white-space:nowrap; color:var(--accent); font-weight:600; text-decoration:none; }
@@ -142,8 +144,9 @@
         <div class="opts wrap">
           <button class="opt" data-v="rates" data-t="fRates"></button>
           <button class="opt" data-v="loads" data-t="fLoads"></button>
+          <button class="opt" data-v="waiting" data-t="fWait"></button>
           <button class="opt" data-v="pay" data-t="fPay"></button>
-          <button class="opt" data-v="dispatch" data-t="fDispatch"></button>
+          <button class="opt" data-v="home" data-t="fHome"></button>
           <button class="opt" data-v="paperwork" data-t="fPaper"></button>
           <button class="opt" data-v="app" data-t="fApp"></button>
           <button class="opt" data-v="nothing" data-t="fNothing"></button>
@@ -170,7 +173,9 @@
       <div class="google" id="google" hidden>
         <p data-t="gText"></p>
         <a class="gbtn" id="glink" target="_blank" rel="noopener"><span class="g">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span data-t="gBtn"></span></a>
-        <p class="gnote" data-t="gNote"></p>
+        <p class="gnote" data-t="gHelp"></p>
+        <div class="opts wrap sugs" id="sugs"></div>
+        <p class="gnote" id="copied" hidden></p>
       </div>
       <p class="call" id="call" hidden><span data-t="call"></span> <a id="phone"></a></p>
       <div class="sign" data-t="sign"></div>
@@ -181,67 +186,70 @@
 <script>
 const T = {
   en: {
-    h1: '{driver}, how was this week?', sub: "Three more taps after the stars and you're done.",
-    saved: 'Your {n} {stars} for this week are saved. Three more taps if you have a minute.', star1: 'star', starN: 'stars',
-    followPay: 'Last week you said your settlement was off. Is it sorted now?', followDisp: "Last week you said dispatch wasn't great. Any better?",
-    followYes: 'Yes, better', followNo: 'Not yet', rating: 'Rating',
+    h1: '{driver}, how was this week?', sub: "Three quick ones and you're done.",
+    saved: 'Got your {n} {stars}, thanks.', star1: 'star', starN: 'stars',
+    followPay: 'Last week your settlement was short. Did we fix it?', followDisp: "Last week things with dispatch weren't great. Better now?",
+    followYes: 'Yes, fixed', followNo: 'Not yet', rating: 'Rating',
     qCompany: 'This week with {short}', rough: 'Rough', great: 'Great',
-    qDisp: '{dispatcher}, your dispatcher', qDispNone: 'Your dispatcher',
-    dispHint: 'This week: picked up when you called, found decent loads, had your back with brokers?',
+    qDisp: '{dispatcher}, your dispatcher, this week?', qDispNone: 'Your dispatcher this week?',
+    dispHint: '{dispatcher} sees your answer.', dispHintNone: 'Your dispatcher sees your answer.',
     optGreat: 'Great', optOkay: 'Okay', optBad: 'Not great',
-    qPay: 'Your last settlement', payHint: 'Right amount, on time?', payYes: 'Yes', payAlmost: 'Almost', payNo: 'No',
-    qFix: 'If we could fix one thing', fixHint: 'Pick as many as you want',
-    fRates: 'Rates', fLoads: 'More loads', fPay: 'Pay', fDispatch: 'Dispatch', fPaper: 'Paperwork', fApp: 'The app', fNothing: "Nothing, it's good",
-    qNote: 'Anything from this week?', noteHint: "Optional. Say it the way you'd say it on the phone",
+    qPay: 'Did your settlement come in right?', payHint: 'Right amount, on time', payYes: 'Yes', payAlmost: 'Almost', payNo: 'No',
+    qFix: 'What would make next week better?', fixHint: 'Pick as many as you want',
+    fRates: 'Better rates', fLoads: 'More loads', fWait: 'Less waiting', fPay: 'Faster pay', fHome: 'Home time', fPaper: 'Paperwork help', fApp: 'The app', fNothing: 'Nothing, keep it up',
+    qNote: 'Anything else?', noteHint: 'Only {reader} reads this, not your dispatcher.',
     notePh: 'e.g. waited 4 hours at the dock and nobody called the broker',
-    send: 'Done', fine: 'Every tap is saved. Goes to the {short} driver team.',
-    doneTitle: 'Thanks, {driver}', doneGood: 'Good week, good to hear. See you next week.',
-    doneBad: "Thanks for telling us straight. It's with the driver team now, and next week we'll ask if it got better.",
-    gText: 'One more thing, only if you feel like it. Drivers look carriers up on Google before they call. A few words from someone who actually runs loads with us count more than anything we could write ourselves.',
-    gBtn: 'Rate {short} on Google', gNote: 'Google opens with the stars ready. About 20 seconds.',
-    call: 'If something needs fixing today, call', sign: 'Driver team, {name}',
+    send: 'Send to {sender}', sendNone: 'Send', fine: 'Every tap is saved.',
+    doneTitle: 'Thanks, {driver}', doneGood: 'Glad it was a good week.',
+    doneBad: "Thanks for being straight with me. I've got it, and I'll call you by tomorrow.",
+    gText: 'Can I ask a favor? Drivers look us up on Google before they call, and a few words from someone who actually runs loads with us mean more than anything we could write. Takes 30 seconds.',
+    gBtn: 'Rate {short} on Google', gHelp: 'Not sure what to say? Tap one to copy it:', copied: 'Copied. Paste it in Google.',
+    sugDisp: '{dispatcher} always finds me loads', sugPay: 'Paid right, every week', sugPeople: 'Good people to drive for',
+    call: 'Need it sorted today? Call', sign: 'Driver team, {name}',
   },
   es: {
-    h1: '{driver}, ¿cómo te fue esta semana?', sub: 'Tres toques más después de las estrellas y listo.',
-    saved: 'Tus {n} {stars} de esta semana ya están guardadas. Tres toques más si tienes un minuto.', star1: 'estrella', starN: 'estrellas',
-    followPay: 'La semana pasada dijiste que tu pago no estaba bien. ¿Ya se arregló?', followDisp: 'La semana pasada dijiste que el despacho no iba bien. ¿Mejoró?',
-    followYes: 'Sí, mejor', followNo: 'Todavía no', rating: 'Calificación',
+    h1: '{driver}, ¿cómo te fue esta semana?', sub: 'Tres preguntas rápidas y listo.',
+    saved: 'Recibí tus {n} {stars}, gracias.', star1: 'estrella', starN: 'estrellas',
+    followPay: 'La semana pasada tu pago llegó incompleto. ¿Lo arreglamos?', followDisp: 'La semana pasada el despacho no fue bien. ¿Mejoró?',
+    followYes: 'Sí, arreglado', followNo: 'Todavía no', rating: 'Calificación',
     qCompany: 'Esta semana con {short}', rough: 'Mala', great: 'Excelente',
-    qDisp: '{dispatcher}, tu despachador', qDispNone: 'Tu despachador',
-    dispHint: 'Esta semana: ¿contestó cuando llamaste, encontró buenas cargas, te apoyó con los brokers?',
+    qDisp: '{dispatcher}, tu despachador, ¿esta semana?', qDispNone: 'Tu despachador, ¿esta semana?',
+    dispHint: '{dispatcher} verá tu respuesta.', dispHintNone: 'Tu despachador verá tu respuesta.',
     optGreat: 'Muy bien', optOkay: 'Normal', optBad: 'No muy bien',
-    qPay: 'Tu último pago', payHint: '¿Monto correcto y a tiempo?', payYes: 'Sí', payAlmost: 'Casi', payNo: 'No',
-    qFix: 'Si pudiéramos arreglar una cosa', fixHint: 'Elige las que quieras',
-    fRates: 'Tarifas', fLoads: 'Más cargas', fPay: 'Pagos', fDispatch: 'Despacho', fPaper: 'Papeleo', fApp: 'La app', fNothing: 'Nada, todo bien',
-    qNote: '¿Algo más de esta semana?', noteHint: 'Opcional. Dilo como lo dirías por teléfono',
+    qPay: '¿Tu pago llegó bien?', payHint: 'Monto correcto, a tiempo', payYes: 'Sí', payAlmost: 'Casi', payNo: 'No',
+    qFix: '¿Qué haría mejor la próxima semana?', fixHint: 'Elige las que quieras',
+    fRates: 'Mejores tarifas', fLoads: 'Más cargas', fWait: 'Menos espera', fPay: 'Pago más rápido', fHome: 'Tiempo en casa', fPaper: 'Ayuda con papeles', fApp: 'La app', fNothing: 'Nada, sigan así',
+    qNote: '¿Algo más?', noteHint: 'Solo lo lee {reader}, no tu despachador.',
     notePh: 'ej. esperé 4 horas en el muelle y nadie llamó al broker',
-    send: 'Listo', fine: 'Cada toque se guarda. Llega al equipo de conductores de {short}.',
-    doneTitle: 'Gracias, {driver}', doneGood: 'Buena semana, qué bueno. Nos vemos la próxima.',
-    doneBad: 'Gracias por decirlo claro. Ya lo tiene el equipo, y la próxima semana te preguntaremos si mejoró.',
-    gText: 'Una cosa más, solo si quieres. Los conductores buscan a las empresas en Google antes de llamar. Unas palabras de alguien que de verdad trabaja con nosotros valen más que cualquier cosa que escribamos.',
-    gBtn: 'Califica a {short} en Google', gNote: 'Google se abre con las estrellas listas. Unos 20 segundos.',
-    call: 'Si algo hay que arreglar hoy, llama al', sign: 'Equipo de conductores, {name}',
+    send: 'Enviar a {sender}', sendNone: 'Enviar', fine: 'Cada toque se guarda.',
+    doneTitle: 'Gracias, {driver}', doneGood: 'Qué bueno que fue una buena semana.',
+    doneBad: 'Gracias por decírmelo claro. Ya lo tengo y te llamo a más tardar mañana.',
+    gText: '¿Te puedo pedir un favor? Los conductores nos buscan en Google antes de llamar, y unas palabras de alguien que de verdad trabaja con nosotros valen más que cualquier cosa que escribamos. Son 30 segundos.',
+    gBtn: 'Califica a {short} en Google', gHelp: '¿No sabes qué escribir? Toca una para copiarla:', copied: 'Copiado. Pégalo en Google.',
+    sugDisp: '{dispatcher} always finds me loads', sugPay: 'Paid right, every week', sugPeople: 'Good people to drive for',
+    call: '¿Hay que arreglarlo hoy? Llama al', sign: 'Equipo de conductores, {name}',
   },
   ru: {
-    h1: '{driver}, как прошла неделя?', sub: 'После звёзд ещё три нажатия, и всё.',
-    saved: 'Твои {n} {stars} за эту неделю сохранены. Ещё три нажатия, если есть минута.', star1: 'звезда', starN: 'звезды', starMany: 'звёзд',
-    followPay: 'На прошлой неделе с расчётом было что-то не так. Исправили?', followDisp: 'На прошлой неделе с диспетчером было не очень. Стало лучше?',
-    followYes: 'Да, лучше', followNo: 'Пока нет', rating: 'Оценка',
+    h1: '{driver}, как прошла неделя?', sub: 'Ещё три коротких вопроса, и всё.',
+    saved: 'Твои {n} {stars} засчитаны, спасибо.', star1: 'звезда', starN: 'звезды', starMany: 'звёзд',
+    followPay: 'На прошлой неделе расчёт пришёл меньше. Исправили?', followDisp: 'На прошлой неделе с диспетчером было не очень. Стало лучше?',
+    followYes: 'Да, исправили', followNo: 'Пока нет', rating: 'Оценка',
     qCompany: 'Неделя с {short}', rough: 'Плохо', great: 'Отлично',
-    qDisp: '{dispatcher}, твой диспетчер', qDispNone: 'Твой диспетчер',
-    dispHint: 'На этой неделе: брал трубку, находил нормальные грузы, вставал за тебя перед брокером?',
+    qDisp: '{dispatcher}, твой диспетчер, как на этой неделе?', qDispNone: 'Твой диспетчер, как на этой неделе?',
+    dispHint: '{dispatcher} увидит твой ответ.', dispHintNone: 'Диспетчер увидит твой ответ.',
     optGreat: 'Отлично', optOkay: 'Нормально', optBad: 'Не очень',
-    qPay: 'Последний расчёт', payHint: 'Сумма верная, пришёл вовремя?', payYes: 'Да', payAlmost: 'Почти', payNo: 'Нет',
-    qFix: 'Что исправить в первую очередь', fixHint: 'Можно выбрать несколько',
-    fRates: 'Ставки', fLoads: 'Больше грузов', fPay: 'Оплата', fDispatch: 'Диспетчер', fPaper: 'Документы', fApp: 'Приложение', fNothing: 'Ничего, всё хорошо',
-    qNote: 'Что-то ещё за неделю?', noteHint: 'Необязательно. Пиши как сказал бы по телефону',
+    qPay: 'Расчёт пришёл правильный?', payHint: 'Сумма верная, вовремя', payYes: 'Да', payAlmost: 'Почти', payNo: 'Нет',
+    qFix: 'Что сделало бы следующую неделю лучше?', fixHint: 'Можно выбрать несколько',
+    fRates: 'Ставки выше', fLoads: 'Больше грузов', fWait: 'Меньше ждать', fPay: 'Оплата быстрее', fHome: 'Время дома', fPaper: 'Помощь с документами', fApp: 'Приложение', fNothing: 'Ничего, так держать',
+    qNote: 'Что-то ещё?', noteHint: 'Это читает только {reader}, не диспетчер.',
     notePh: 'например, ждал 4 часа на складе, и никто не позвонил брокеру',
-    send: 'Готово', fine: 'Каждое нажатие сохраняется. Ответы идут команде водителей {short}.',
-    doneTitle: 'Спасибо, {driver}', doneGood: 'Хорошая неделя, рады слышать. До следующей недели.',
-    doneBad: 'Спасибо за честный ответ. Это уже у команды, а через неделю спросим, стало ли лучше.',
-    gText: 'И ещё одно, только если хочется. Водители смотрят компанию в Google перед тем, как позвонить. Пара слов от того, кто реально у нас возит, значит больше всего, что мы напишем сами.',
-    gBtn: 'Оценить {short} в Google', gNote: 'Google откроется сразу со звёздами. Секунд 20.',
-    call: 'Если что-то нужно решить сегодня, звони', sign: 'Команда водителей, {name}',
+    send: 'Отправить: {sender}', sendNone: 'Отправить', fine: 'Каждое нажатие сохраняется.',
+    doneTitle: 'Спасибо, {driver}', doneGood: 'Рады, что неделя прошла хорошо.',
+    doneBad: 'Спасибо за честный ответ. Он уже у меня, позвоню до завтра.',
+    gText: 'Можно попросить? Водители смотрят нас в Google перед звонком, и пара слов от того, кто реально у нас возит, значит больше всего, что мы напишем сами. Секунд 30.',
+    gBtn: 'Оценить {short} в Google', gHelp: 'Не знаешь, что написать? Нажми, текст скопируется (на английском, для Google):', copied: 'Скопировано. Вставь в Google.',
+    sugDisp: '{dispatcher} always finds me loads', sugPay: 'Paid right, every week', sugPeople: 'Good people to drive for',
+    call: 'Нужно решить сегодня? Звони', sign: 'Команда водителей, {name}',
   },
 };
 const params = new URLSearchParams(location.search);
@@ -250,7 +258,8 @@ const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
 
 fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list => {
   const c = list.find(x => x.id === params.get('c')) || list.find(x => x.id === 'tls');
-  const V = { driver: c.sample.driver, dispatcher: c.sample.dispatcher, short: c.short, name: c.name };
+  const V = { driver: c.sample.driver, dispatcher: c.sample.dispatcher, short: c.short, name: c.name, sender: c.sample.sender || '' };
+  V.reader = V.sender || `the ${c.short} driver team`;
   let lang = T[params.get('lang')] ? params.get('lang') : 'en';
   const lastIssue = params.get('last'); // pay | dispatcher
 
@@ -286,6 +295,8 @@ fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list 
     document.querySelectorAll('[data-t]').forEach(el => {
       const k = el.dataset.t;
       if (k === 'qDisp' && !V.dispatcher) { el.textContent = t.qDispNone; return; }
+      if (k === 'dispHint' && !V.dispatcher) { el.textContent = t.dispHintNone; return; }
+      if (k === 'send' && !V.sender) { el.textContent = t.sendNone; return; }
       el.textContent = fill(t[k], V);
     });
     document.querySelectorAll('[data-t-ph]').forEach(el => el.placeholder = t[el.dataset.tPh]);
@@ -299,6 +310,15 @@ fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list 
     }
     if (lastIssue) $('followQ').textContent = lastIssue === 'pay' ? t.followPay : t.followDisp;
     if (happy !== null) $('doneText').textContent = happy ? t.doneGood : t.doneBad;
+    // Подсказки для Google собираются из ответов водителя; текст всегда на английском — его читают в Google
+    const sugs = [];
+    if (V.dispatcher && (answers.dispatcher || [])[0] === 'great') sugs.push(fill(t.sugDisp, V));
+    if ((answers.pay || [])[0] === 'always') sugs.push(t.sugPay);
+    sugs.push(t.sugPeople);
+    $('sugs').innerHTML = '';
+    sugs.forEach(txt => { const b = document.createElement('button'); b.className = 'opt'; b.textContent = '“' + txt + '”';
+      b.addEventListener('click', () => { navigator.clipboard && navigator.clipboard.writeText(txt).catch(() => {}); $('copied').hidden = false; $('copied').textContent = t.copied; window.open($('glink').href, '_blank', 'noopener'); });
+      $('sugs').appendChild(b); });
   }
 
   // Прошлая неделя: если водитель на что-то жаловался, первым спрашиваем, исправили ли

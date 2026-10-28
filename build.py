@@ -4,7 +4,7 @@
 
 Для каждой компании пишет <id>/template.html (вставлять в портал) и
 <id>/preview.html (выдуманные данные, звёзды ведут на общую страницу).
-Плейсхолдеры портала: {first_name} {link} {week} {sender_name} {pause_link}.
+Плейсхолдеры портала: {first_name} {link} {sender_name} {pause_link}.
 """
 
 import html
@@ -57,8 +57,7 @@ for c in companies:
     template = open(f"{c['id']}/template.html").read()
     preview = (
         template.replace("{first_name}", c["sample"]["driver"])
-        .replace("{week}", "Oct 27")
-        .replace("{sender_name}", c["sample"].get("sender", "Driver team"))
+        .replace("{sender_name}", c["sample"].get("sender", "[HR name]"))
         .replace("{pause_link}", "#pause")
         .replace("{link}?r=", f"../page/index.html?c={c['id']}&r=")
         .replace("{link}", f"../page/index.html?c={c['id']}")
