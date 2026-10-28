@@ -1,3 +1,423 @@
 [
-  {"id": "tls", "name": "Target Logistics Solution", "portal": "tls.mycarrierlink.com", "subject": "{first_name}, how was your week?", "status": "example"}
+ {
+  "id": "adit",
+  "name": "Adit Global LLC",
+  "short": "Adit Global",
+  "accent": "#1b6f85",
+  "logo": "img/adit/logo.jpg",
+  "hero": "img/adit/hero.jpg",
+  "done": "img/adit/done.jpg",
+  "google": null,
+  "portal": "adit.mycarrierlink.com",
+  "sample": {
+   "driver": "Marcus",
+   "dispatcher": "Kevin Smith"
+  },
+  "logo_mail": "img/adit/logo-mail.png",
+  "logo_mail_w": 51,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "aldis",
+  "name": "Aldis Group LLC",
+  "short": "Aldis",
+  "accent": "#1d3557",
+  "logo": "img/aldis/logo.png",
+  "hero": "img/aldis/hero.jpg",
+  "done": "img/aldis/done.jpg",
+  "google": null,
+  "portal": "aldis.mycarrierlink.com",
+  "sample": {
+   "driver": "Andre",
+   "dispatcher": "Robert Paul"
+  },
+  "logo_mail": "img/aldis/logo-mail.png",
+  "logo_mail_w": 118,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "alliancelogistics",
+  "name": "Alliance Logistics LLC",
+  "short": "Alliance",
+  "accent": "#353365",
+  "logo": "img/alliancelogistics/logo.svg",
+  "hero": "img/alliancelogistics/hero.jpg",
+  "done": "img/alliancelogistics/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJj65f6Y2txokRr5J7wYRHuUs",
+  "portal": "alliancelogistics.mycarrierlink.com",
+  "sample": {
+   "driver": "Luis",
+   "dispatcher": null
+  },
+  "logo_mail": "img/alliancelogistics/logo-mail.png",
+  "logo_mail_w": 39,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "annlogistics",
+  "name": "Ann Logistics LLC",
+  "short": "Ann Logistics",
+  "accent": "#c2410c",
+  "logo": "img/annlogistics/logo.png",
+  "hero": "img/annlogistics/hero.jpg",
+  "done": "img/annlogistics/done.jpg",
+  "google": null,
+  "portal": "annlogistics.mycarrierlink.com",
+  "sample": {
+   "driver": "Dmitri",
+   "dispatcher": "Chris Martin"
+  },
+  "logo_mail": "img/annlogistics/logo-mail.png",
+  "logo_mail_w": 52,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "arilogistics",
+  "name": "Ari Logistics LLC",
+  "short": "ARI Logistics",
+  "accent": "#8b1a1a",
+  "logo": "img/arilogistics/logo.png",
+  "hero": "img/arilogistics/hero.jpg",
+  "done": "img/arilogistics/done.jpg",
+  "google": null,
+  "portal": "arilogistics.mycarrierlink.com",
+  "sample": {
+   "driver": "Sam",
+   "dispatcher": null
+  },
+  "logo_mail": "img/arilogistics/logo-mail.png",
+  "logo_mail_w": 73,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "athena",
+  "name": "Athena Trucking LLC",
+  "short": "Athena",
+  "accent": "#7f6435",
+  "logo": "img/athena/logo.jpg",
+  "hero": "img/athena/hero.jpg",
+  "done": "img/athena/done.jpg",
+  "google": null,
+  "portal": "athena.mycarrierlink.com",
+  "sample": {
+   "driver": "Jamal",
+   "dispatcher": "Ryan Carter"
+  },
+  "logo_mail": "img/athena/logo-mail.png",
+  "logo_mail_w": 26,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "atlas",
+  "name": "Atlas Bridge Freight",
+  "short": "Atlas",
+  "accent": "#b3122e",
+  "logo": "img/atlas/logo.png",
+  "hero": "img/atlas/hero.jpg",
+  "done": "img/atlas/done.jpg",
+  "google": null,
+  "portal": "atlas.mycarrierlink.com",
+  "sample": {
+   "driver": "Carlos",
+   "dispatcher": "Paul Bennett"
+  },
+  "logo_mail": "img/atlas/logo-mail.png",
+  "logo_mail_w": 40,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "cnulogistics",
+  "name": "CNU Logistics LLC",
+  "short": "CNU",
+  "accent": "#22262b",
+  "logo": "img/cnulogistics/logo.png",
+  "hero": "img/cnulogistics/hero.jpg",
+  "done": "img/cnulogistics/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJOw0oS_QCxIkR0isvMI8XW-k",
+  "portal": "cnulogistics.mycarrierlink.com",
+  "sample": {
+   "driver": "Mike",
+   "dispatcher": "Veronica Collins"
+  },
+  "logo_mail": "img/cnulogistics/logo-mail.png",
+  "logo_mail_w": 31,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "jrtrans",
+  "name": "JR TRANS INC.",
+  "short": "JR Trans",
+  "accent": "#1f3fa8",
+  "logo": "img/jrtrans/logo.png",
+  "hero": "img/jrtrans/hero.jpg",
+  "done": "img/jrtrans/done.jpg",
+  "google": null,
+  "portal": "jrtrans.mycarrierlink.com",
+  "sample": {
+   "driver": "Oleg",
+   "dispatcher": null
+  },
+  "logo_mail": "img/jrtrans/logo-mail.png",
+  "logo_mail_w": 68,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "logisticssystemsllc",
+  "name": "Logistics Systems LLC",
+  "short": "Logistics Systems",
+  "accent": "#c8102e",
+  "logo": "img/logisticssystemsllc/logo.jpg",
+  "hero": "img/logisticssystemsllc/hero.jpg",
+  "done": "img/logisticssystemsllc/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJj0KgFUWtxokRI3Va9C4HQsk",
+  "portal": "logisticssystemsllc.mycarrierlink.com",
+  "sample": {
+   "driver": "Tony",
+   "dispatcher": "Mark Lee"
+  },
+  "logo_mail": "img/logisticssystemsllc/logo-mail.png",
+  "logo_mail_w": 39,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "odyssey",
+  "name": "Odyssey Express LLC",
+  "short": "Odyssey",
+  "accent": "#22306b",
+  "logo": "img/odyssey/logo.png",
+  "hero": "img/odyssey/hero.jpg",
+  "done": "img/odyssey/done.jpg",
+  "google": null,
+  "portal": "odyssey.mycarrierlink.com",
+  "sample": {
+   "driver": "Ray",
+   "dispatcher": "Anna Price"
+  },
+  "logo_mail": "img/odyssey/logo-mail.png",
+  "logo_mail_w": 63,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "pennlogisticsllc",
+  "name": "Pennsylvania Logistics LLC",
+  "short": "Pennsylvania Logistics",
+  "accent": "#1a3b6e",
+  "logo": "img/pennlogisticsllc/logo.svg",
+  "hero": "img/pennlogisticsllc/hero.jpg",
+  "done": "img/pennlogisticsllc/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJJ7YdkmADxIkRjhgUIOm_RcQ",
+  "portal": "pennlogisticsllc.mycarrierlink.com",
+  "sample": {
+   "driver": "Victor",
+   "dispatcher": null
+  },
+  "logo_mail": "img/pennlogisticsllc/logo-mail.png",
+  "logo_mail_w": 42,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "redmax",
+  "name": "Redmax LLC",
+  "short": "Redmax",
+  "accent": "#cc1a14",
+  "logo": "img/redmax/logo.png",
+  "hero": "img/redmax/hero.jpg",
+  "done": "img/redmax/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJF0MIBGmnxokRsadmoJLYAPI",
+  "portal": "redmax.mycarrierlink.com",
+  "sample": {
+   "driver": "Eddie",
+   "dispatcher": "Tom Hayes"
+  },
+  "logo_mail": "img/redmax/logo-mail.png",
+  "logo_mail_w": 143,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "rulinglogistics",
+  "name": "Ruling Logistics",
+  "short": "Ruling",
+  "accent": "#c2410c",
+  "logo": "img/rulinglogistics/logo.png",
+  "hero": "img/rulinglogistics/hero.jpg",
+  "done": "img/rulinglogistics/done.jpg",
+  "google": null,
+  "portal": "rulinglogistics.mycarrierlink.com",
+  "sample": {
+   "driver": "Nick",
+   "dispatcher": "Dana Brooks"
+  },
+  "logo_mail": "img/rulinglogistics/logo-mail.png",
+  "logo_mail_w": 39,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "shiftlinetransit",
+  "name": "SHIFT LINE TRANSIT",
+  "short": "Shift Line",
+  "accent": "#1a1a1a",
+  "logo": "img/shiftlinetransit/logo.png",
+  "hero": "img/shiftlinetransit/hero.jpg",
+  "done": "img/shiftlinetransit/done.jpg",
+  "google": "https://g.page/r/Cd4Vfv-Fo-v1EBM/review",
+  "portal": "shiftlinetransit.mycarrierlink.com",
+  "sample": {
+   "driver": "Omar",
+   "dispatcher": null
+  },
+  "logo_mail": "img/shiftlinetransit/logo-mail.png",
+  "logo_mail_w": 43,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "skybridgels",
+  "name": "Skybridge Logistics LLC",
+  "short": "Skybridge",
+  "accent": "#0e2a4f",
+  "logo": "img/skybridgels/logo.jpg",
+  "hero": "img/skybridgels/hero.jpg",
+  "done": "img/skybridgels/done.jpg",
+  "google": null,
+  "portal": "skybridgels.mycarrierlink.com",
+  "sample": {
+   "driver": "Paul",
+   "dispatcher": "Lisa Grant"
+  },
+  "logo_mail": "img/skybridgels/logo-mail.png",
+  "logo_mail_w": 60,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "tl",
+  "name": "TRILUMINA LOGISTICS INC",
+  "short": "Trilumina",
+  "accent": "#1638b8",
+  "logo": "img/tl/logo.jpg",
+  "hero": "img/tl/hero.jpg",
+  "done": "img/tl/done.jpg",
+  "google": null,
+  "portal": "tl.mycarrierlink.com",
+  "sample": {
+   "driver": "Ivan",
+   "dispatcher": "Alex Moore"
+  },
+  "logo_mail": "img/tl/logo-mail.png",
+  "logo_mail_w": 40,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "tls",
+  "name": "Target Logistics Solution LLC",
+  "short": "TLS",
+  "accent": "#2a8371",
+  "logo": "img/tls/logo.jpg",
+  "hero": "img/tls/hero.jpg",
+  "done": "img/tls/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJe0iEAEqtxokRduT3d_tcXVY",
+  "portal": "tls.mycarrierlink.com",
+  "sample": {
+   "driver": "Derek",
+   "dispatcher": null
+  },
+  "logo_mail": "img/tls/logo-mail.png",
+  "logo_mail_w": 37,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?",
+  "phone": "+12674946323",
+  "phone_text": "(267) 494-6323",
+  "custom_template": true
+ },
+ {
+  "id": "ursaexpress",
+  "name": "Ursa Express LLC",
+  "short": "Ursa",
+  "accent": "#5b2a86",
+  "logo": "img/ursaexpress/logo.svg",
+  "hero": "img/ursaexpress/hero.jpg",
+  "done": "img/ursaexpress/done.jpg",
+  "google": "https://search.google.com/local/writereview?placeid=ChIJJ9KjiPupxokRWfxWza8AB78",
+  "portal": "ursaexpress.mycarrierlink.com",
+  "sample": {
+   "driver": "Hector",
+   "dispatcher": "Nina Ford"
+  },
+  "logo_mail": "img/ursaexpress/logo-mail.png",
+  "logo_mail_w": 103,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "vertexexpedite",
+  "name": "Vertex Expedite LLC",
+  "short": "Vertex Expedite",
+  "accent": "#0b2e5b",
+  "logo": "img/vertexexpedite/logo.png",
+  "hero": "img/vertexexpedite/hero.jpg",
+  "done": "img/vertexexpedite/done.jpg",
+  "google": null,
+  "portal": "vertexexpedite.mycarrierlink.com",
+  "sample": {
+   "driver": "Jay",
+   "dispatcher": "Sean Ward"
+  },
+  "logo_mail": "img/vertexexpedite/logo-mail.png",
+  "logo_mail_w": 55,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "vertextransportation",
+  "name": "Vertex Transportation LLC",
+  "short": "Vertex",
+  "accent": "#002166",
+  "logo": "img/vertextransportation/logo.svg",
+  "hero": "img/vertextransportation/hero.jpg",
+  "done": "img/vertextransportation/done.jpg",
+  "google": null,
+  "portal": "vertextransportation.mycarrierlink.com",
+  "sample": {
+   "driver": "Sergio",
+   "dispatcher": null
+  },
+  "logo_mail": "img/vertextransportation/logo-mail.png",
+  "logo_mail_w": 52,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ },
+ {
+  "id": "zubrfreight",
+  "name": "Zubr Freight LLC",
+  "short": "Zubr",
+  "accent": "#2b2b2b",
+  "logo": "img/zubrfreight/logo.png",
+  "hero": "img/zubrfreight/hero.jpg",
+  "done": "img/zubrfreight/done.jpg",
+  "google": null,
+  "portal": "zubrfreight.mycarrierlink.com",
+  "sample": {
+   "driver": "Kyle",
+   "dispatcher": "Kate Bell"
+  },
+  "logo_mail": "img/zubrfreight/logo-mail.png",
+  "logo_mail_w": 121,
+  "logo_mail_h": 40,
+  "subject": "{first_name}, how was your week?"
+ }
 ]

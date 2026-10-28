@@ -38,6 +38,7 @@
 <body>
 <div class="wrap">
   <h1>Письма-отзывы водителям</h1>
+  <p class="lead" id="count"></p>
   <p class="lead">У каждой компании свой шаблон письма «как вам у нас работается». HTML копируется в настройки отзывов HR-портала (поле Email template, задача HRP-1213). В предпросмотре выдуманные данные. Звёзды в письме ведут на <a href="page/index.html?c=tls">общую страницу опроса</a>: одна на все компании, название, логотип, цвет и ссылка Google подставляются из настроек компании.</p>
   <div class="ph" aria-label="Плейсхолдеры">
     <code>{first_name}</code><code>{name}</code><code>{company}</code><code>{link}</code><code>{loads}</code><code>{logo_url}</code>
@@ -51,12 +52,13 @@ const fit = (f) => { try { f.style.height = f.contentDocument.documentElement.sc
 const esc = (s) => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const V = Date.now();
 fetch('companies.json?v=' + V, { cache: 'no-store' }).then(r => r.json()).then(list => {
+  document.getElementById('count').textContent = `${list.length} компаний. Картинки из Higgsfield, у каждой свой стиль.`;
   document.getElementById('list').innerHTML = list.map(c => `
     <section class="company" id="${c.id}">
       <div class="head">
         <div>
           <h2>${esc(c.name)}</h2>
-          <div class="meta">Тема: <b>${esc(c.subject)}</b> · портал ${esc(c.portal)}</div>
+          <div class="meta">Тема: <b>${esc(c.subject)}</b> · портал ${esc(c.portal)} · Google: ${c.google ? 'есть' : '<b>нет ссылки в портале</b>'}</div>
         </div>
         <div class="btns">
           <button class="btn" data-copy="${c.id}/template.html?v=${V}">Скопировать HTML</button>
@@ -66,8 +68,8 @@ fetch('companies.json?v=' + V, { cache: 'no-store' }).then(r => r.json()).then(l
         </div>
       </div>
       <div class="views">
-        <div class="frame desk"><div class="label">Компьютер, 600px</div><iframe src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, компьютер" onload="fit(this)"></iframe></div>
-        <div class="phone"><div class="frame"><iframe src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, телефон" onload="fit(this)"></iframe></div></div>
+        <div class="frame desk"><div class="label">Компьютер, 600px</div><iframe loading="lazy" src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, компьютер" onload="fit(this)"></iframe></div>
+        <div class="phone"><div class="frame"><iframe loading="lazy" src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, телефон" onload="fit(this)"></iframe></div></div>
       </div>
     </section>`).join('');
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
