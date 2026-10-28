@@ -1,0 +1,48 @@
+{
+  "tenant": "vertexexpedite",
+  "website": "https://vertexexpedite.com",
+  "verified": true,
+  "colors": [
+    {
+      "hex": "#0b2e5b",
+      "role": "primary",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#007bff",
+      "role": "accent",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#e8eef6",
+      "role": "background",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#2e3542",
+      "role": "text",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#294a7b",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#ff6725",
+      "role": "accent",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Libre Franklin (new brandbook)",
+    "Open Sans (live site)",
+    "Avenir Next (old 2024 brandbook)"
+  ],
+  "imagery": "The live site has real stock photos: a black hero, a delivery man with boxes at a white cargo van, a man in front of an orange semi cab, a box truck on a phone map, and warehouse shots. The new blue signature and bid kit use a 3D chrome Sprinter-style cargo van with blue glow accents.",
+  "mood": "fast, crisp, techy, blue-steel",
+  "fleet": "cargo vans",
+  "tagline": "Fast Freight. Clear Pricing. Seamless Service.",
+  "design_notes": "Three palettes exist. The current Oct-2026 brand is navy #0b2e5b plus electric blue #007bff with the chrome van (Vika's brandbook, which is not stored locally; the hex values come from memory notes and match pixels in the blue bid template on the Desktop). The live site still runs an orange #ff6725 Tilda template with a navy #294a7b speed-line van logo, and the 2024 Albatross brandbook and portal logo are lavender #a490ff. Use the blue brand with a speed-lined cargo van, and avoid lavender and orange.",
+  "confidence": "medium"
+}

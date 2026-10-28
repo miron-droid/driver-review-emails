@@ -1,0 +1,24 @@
+{
+  "tenant": "jrtrans",
+  "website": null,
+  "verified": "No website found (jrtransinc.com is an unrelated auto transporter in WA). FMCSA aggregators: JR TRANS INC, 1509 Clyde Waite Dr, Bristol, PA 19007, USDOT 2944820, MC 996591 - matches name and city.",
+  "colors": [
+    {
+      "hex": "#2456b8",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "logo"
+    }
+  ],
+  "fonts": [],
+  "imagery": "No website, so no imagery to reference. Only known asset is the logo: royal-blue oval badge reading 'JR TRANS, INC BRISTOL, PA'.",
+  "mood": "classic, solid, no-nonsense, blue",
+  "fleet": "mixed: unknown type, FMCSA lists 58 power units/58 drivers, general freight + motor vehicles (likely tractors)",
+  "tagline": null,
+  "design_notes": "Hex is an approximation of 'royal blue' from the logo description, not measured - sample the logo file before use. Echo the classic oval badge shape (old-school trucking emblem) with white lettering.",
+  "confidence": "low"
+}

@@ -1,0 +1,42 @@
+{
+  "tenant": "annlogistics",
+  "website": "https://www.annlogistics.com/",
+  "verified": "Domain matches the HR-portal email domain; site states McKinney, TX HQ, MC 1285713 / USDOT 3688307; logo on site is the orange 'Ann' with truck outline + blue 'logistics'.",
+  "colors": [
+    {
+      "hex": "#F96137",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#0B0B0C",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#137FAD",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#F4F1EC",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#3ECF8E",
+      "role": "accent",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Archivo",
+    "IBM Plex Mono"
+  ],
+  "imagery": "No photos at all: a near-black page with a faint grid, an orange glow in the corner, and a UI-style 'lane board' mock (McKinney->LA, Dallas->Phoenix rows with progress bars). Typography carries the design.",
+  "mood": "dark technical bold orange",
+  "fleet": "mixed: Sprinter cargo vans, 26 ft box trucks, large straight trucks",
+  "tagline": "Good service and strong relationships are worth more to us than profit.",
+  "design_notes": "Huge uppercase wide Archivo headlines, with the last word in orange or as an outlined (stroke-only) word. Monospace micro-labels (01 - ABOUT US), thin hairline dividers, and data/route rows. The logo's blue (#137FAD) is barely used on the site; orange on black dominates. The logo's truck silhouette is a single orange outline stroke.",
+  "confidence": "high"
+}

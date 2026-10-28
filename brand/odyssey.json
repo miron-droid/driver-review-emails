@@ -1,0 +1,53 @@
+{
+  "tenant": "odyssey",
+  "website": "https://odysseyexpress.us",
+  "verified": true,
+  "colors": [
+    {
+      "hex": "#232e69",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#ffa202",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#dab561",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#404040",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#ececec",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#32312b",
+      "role": "background",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#f8f1da",
+      "role": "background",
+      "source": "brandbook"
+    }
+  ],
+  "fonts": [
+    "Play",
+    "Open Sans",
+    "Cormorant Garamond (brandbook)"
+  ],
+  "imagery": "Real stock photos. The hero shows white semi trucks on a highway under a bright cloudy daytime sky; below it are people (a loader at a white cargo van, a warehouse worker, a delivery man) plus testimonial headshots and a laptop/phone tracking-map mockup.",
+  "mood": "clean, corporate, navy-and-gold, dependable",
+  "fleet": "mixed: sprinter vans, cargo vans, box trucks, 18-wheelers (site copy); hero shows semis",
+  "tagline": "From Pickup To Delivery – Always On TIME (brandbook: Experience. Strategy. Honor.)",
+  "design_notes": "Two logos are in use. The HR-portal mark is navy #232e69 speed-chevrons with an amber #ffa202 block, and that navy is also the site's main color. The site header and brandbook use an ornate gold #dab561 compass crest with a Spartan helmet, which the brandbook sets on dark charcoal and navy. Echo the navy plus gold or amber pairing and the forward-chevron or compass and route motif.",
+  "confidence": "high"
+}

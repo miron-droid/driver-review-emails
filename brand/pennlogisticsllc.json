@@ -1,0 +1,24 @@
+{
+  "tenant": "pennlogisticsllc",
+  "website": null,
+  "verified": "pennlogisticsllc.com has no A record (only Google MX for email) and no Wayback snapshot; no Facebook/LinkedIn found. FMCSA aggregators list 'PENNSYLVANIA LOGISTICS' as DBA of CVT LOGISTIC LLC, 1631 Loretta Ave D, Feasterville-Trevose, PA 19053, USDOT 2911280 (2 power units) - likely but not confirmed to be the same company.",
+  "colors": [
+    {
+      "hex": "#7fbfe6",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "logo"
+    }
+  ],
+  "fonts": [],
+  "imagery": "No website, so no imagery to reference. Only known asset is the logo: light-blue line-art horse/knight on a shield.",
+  "mood": "heraldic, calm, light, traditional",
+  "fleet": "mixed: unknown (FMCSA: 2 power units, general freight; type not listed)",
+  "tagline": null,
+  "design_notes": "Hex is an approximation from the logo description ('light blue line art'), not measured - sample the actual logo file from the HR portal before use. Echo thin line-art strokes and the shield/crest shape.",
+  "confidence": "low"
+}

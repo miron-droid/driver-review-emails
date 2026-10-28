@@ -1,0 +1,52 @@
+{
+  "tenant": "ursaexpress",
+  "website": "http://ursaexpress.com",
+  "verified": "Yes. The footer reads '1427 Kathleen Ct, Jamison, PA 18929' and 'dispatch@ursaexpress.com'. The domain is the HR email domain. The site is HTTP only (HTTPS fails), built on Tilda as a single page.",
+  "colors": [
+    {
+      "hex": "#2a344b",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#c32939",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#342980",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#352476",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#c1262d",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#ed7952",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Arial",
+    "Roboto"
+  ],
+  "imagery": "Real daylight stock photos: a white Ford Transit cutaway box truck with the URSA bear logo at a residential job site, rows of white straight/box trucks at a depot, a warehouse forklift, and reefer semis.",
+  "mood": "friendly, dependable, clean, daylight",
+  "fleet": "mixed: cargo vans (Sprinter, Transit, ProMaster) and box/straight trucks (Freightliner M2, Isuzu NPR)",
+  "tagline": "Reliable freight transportation for a successful business",
+  "design_notes": "White trucks carrying the bear silhouette in an indigo-to-red/coral gradient. Navy #2a344b text on white, with red #c32939 CTAs. Simple, bright and businesslike.",
+  "confidence": "high"
+}

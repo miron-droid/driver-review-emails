@@ -1,0 +1,41 @@
+{
+  "tenant": "rulinglogistics",
+  "website": "https://www.ruling-logistics.com/",
+  "verified": "Site links to rulinglogistics.hr-portal.net (our HR portal) and to the Altek drivers app; footer: Ruling Logistics, Miami, FL 33126; logo is the orange/charcoal box-truck mark.",
+  "colors": [
+    {
+      "hex": "#EB4B1D",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#343031",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#000000",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#FFFFFF",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#E5E9ED",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Dongle"
+  ],
+  "imagery": "Cut-out product shot of a white Mercedes Sprinter cargo van with the Ruling logo on its side, over a charcoal-to-rust gradient. The Equipment page shows real photos of vans (small van through XLWB), small straight, curtain-side and straight truck. Daytime, no people.",
+  "mood": "bold orange charcoal friendly",
+  "fleet": "cargo vans",
+  "tagline": "Connecting you from every corner to the most amazing places in the U.S. and Canada. Reliable, safe, and on time.",
+  "design_notes": "Alternating black, charcoal (#343031) and full-bleed orange bands. Rounded charcoal cards (25px radius) with orange headings, and white pill cards with orange line icons. The logo is a line-art box truck drawn in orange outline next to bold white wordmark text; echo it with outline-stroke truck drawings, not filled ones.",
+  "confidence": "high"
+}

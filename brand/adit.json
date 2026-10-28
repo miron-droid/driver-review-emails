@@ -1,0 +1,29 @@
+{
+  "tenant": "adit",
+  "website": null,
+  "verified": "No website found. Probed aditglobal.com/.us/.net, aditgloballlc.com, aditglobaltrucking.com and others (none resolve); web search finds no carrier named Adit Global in Dallas (only the unrelated ADUT GLOBAL LLC, Mt. Prospect IL, USDOT 3915903). No Facebook/LinkedIn/Google Business match found.",
+  "colors": [
+    {
+      "hex": "#14A3B8",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#1B2E4B",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#FFFFFF",
+      "role": "background",
+      "source": "logo"
+    }
+  ],
+  "fonts": [],
+  "imagery": "No site to inspect. The only known visual is the logo: a teal/navy truck with chevrons and the text ADIT GLOBAL TRUCKING CARGO.",
+  "mood": "teal navy corporate motion",
+  "fleet": "semi trucks",
+  "tagline": null,
+  "design_notes": "Hex values are approximations of the verbal logo description (teal + navy), not pixel-sampled; replace them once the actual logo file from the HR portal is sampled. Echo the forward chevrons from the logo as a motion motif. Fleet type is inferred from 'trucking cargo' wording only.",
+  "confidence": "low"
+}

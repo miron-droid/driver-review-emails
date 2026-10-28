@@ -1,0 +1,41 @@
+{
+  "tenant": "redmax",
+  "website": "https://redmaxllc.com",
+  "verified": "Email domain resolves to 'Redmax Logistics' site; contacts: 10 Reene Cir, Chalfont, PA 18914, info@redmaxllc.com. onboarding.redmaxllc.com just loads the same site via a frame. Logo SVG = red '>>' + black REDMAX.",
+  "colors": [
+    {
+      "hex": "#ff3333",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#ff0000",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#2b2a29",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#c8c8c8",
+      "role": "secondary",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Montserrat"
+  ],
+  "imagery": "Real photos in daylight: a white 53ft semi trailer on a winding coastal mountain highway (hero), and a smiling driver in a red cap and red polo unloading boxes from a white cargo van. Plus a flat gray US map with small red-and-yellow box-truck icons.",
+  "mood": "energetic, bold, red, friendly, direct",
+  "fleet": "mixed: cargo vans + small and large straight trucks (quote form); hero shows a semi",
+  "tagline": "Shipping Solutions That Work for You",
+  "design_notes": "Red double-chevron '>>' used as a bullet before every all-caps Montserrat heading (WHO WE ARE, COVERAGE); first headline word in red, rest white/charcoal. Flat red rectangular buttons, light gray #c8c8c8 map, red check marks.",
+  "confidence": "high"
+}

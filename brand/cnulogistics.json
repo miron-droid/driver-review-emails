@@ -1,0 +1,42 @@
+{
+  "tenant": "cnulogistics",
+  "website": "https://cnulogistics.com",
+  "verified": "Email domain resolves to 'CNU Logistics' site; footer USDOT 3019542. Note: site address is 1795 Stout Dr, Warminster, PA (not Holland), same name/domain so treated as same company.",
+  "colors": [
+    {
+      "hex": "#3c8ce6",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#2a7ad4",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#444444",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#f4f5f6",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Oswald",
+    "Inter"
+  ],
+  "imagery": "Real/stock-style photos of white semi trucks on highways: aerial daytime shot of a semi with 'CNU LOGISTICS' on the trailer winding past a forest lake, and a motion-blurred close-up of a semi on an open blue-toned road. No people in hero.",
+  "mood": "bold, reliable, scenic, blue, confident",
+  "fleet": "mixed: sprinter vans + box trucks (text says 1,000+), but all site photos show semi trucks",
+  "tagline": "Right on time. Always",
+  "design_notes": "All-caps condensed Oswald headlines with the first line in bright blue #3c8ce6 and the rest in dark gray #444444; section labels styled as '| About Us |' between vertical bars. Rounded-corner photo cards on a very light gray #f4f5f6 page; big blue stat numbers (8+, 1 000+, 98 %).",
+  "confidence": "high"
+}

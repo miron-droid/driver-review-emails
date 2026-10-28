@@ -1,0 +1,42 @@
+{
+  "tenant": "alliancelogistics",
+  "website": "https://alliancelogisticsllc.com",
+  "verified": "Email domain resolves to the site; footer on every page: 305 Olive Ave B, Holland, PA 19044, 484-600-2090. Name 'Alliance Logistics LLC' in title.",
+  "colors": [
+    {
+      "hex": "#5b52c9",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#1a1840",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#f6f5fb",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#353365",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#81bd03",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Barlow Condensed",
+    "Barlow"
+  ],
+  "imagery": "No photos at all: light lavender grid background, faint thin-line outline illustration of a box truck, line icons, and phone mockups of the CargoETL driver app. Clean daytime SaaS look, no people or highways.",
+  "mood": "clean, techy, fast, light, modern",
+  "fleet": "mixed: sprinter/cargo vans, straight trucks and Class 8 tractors (expedited, per drivers FAQ)",
+  "tagline": "Your Freight, Delivered Fast.",
+  "design_notes": "Heavy uppercase condensed headlines (Barlow Condensed) with the second line in indigo #5b52c9, e.g. 'DRIVE WITH ALLIANCE. / GET PAID FAST.'. Website recolors the wordmark to indigo #5850c8; the original logo (seen as partner logo on logisticssystemsllc.com) is navy #353365 'A' + lime #81bd03 tree. Echo thin single-weight line-art vehicles on a pale lavender grid.",
+  "confidence": "high"
+}

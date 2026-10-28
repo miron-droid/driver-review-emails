@@ -1,0 +1,62 @@
+{
+  "tenant": "atlas",
+  "website": "https://atlasbridgefrieght.com",
+  "verified": "Yes. The domain is misspelled 'frieght'; it is the one linked in their email signature (the correctly spelled atlasbridgefreight.com is a Squarespace 'Coming Soon' page). The footer reads 'Canton, OH 44721 © Atlas Bridge Freight', USDOT 4529106, MC 1795618, which matches 6545 Market Ave N, Canton.",
+  "colors": [
+    {
+      "hex": "#d00020",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#0d0d0d",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#1b1b1b",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#f2f2f2",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#a68c53",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#800b15",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#bf0b29",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#812b3b",
+      "role": "secondary",
+      "source": "template"
+    },
+    {
+      "hex": "#caa660",
+      "role": "accent",
+      "source": "template"
+    }
+  ],
+  "fonts": [
+    "Manrope",
+    "Montserrat"
+  ],
+  "imagery": "Photoreal (AI-rendered) scenes under an overcast, rainy sky on wet asphalt: black-liveried semis, a black box truck and a cargo van with the gold arch logo, and crews in black jackets loading boxes at docks with red wall stripes. Also a dark dispatch room lit by red monitors and a doorstep last-mile delivery.",
+  "mood": "dark, moody, premium, industrial, serious",
+  "fleet": "mixed: semi trucks, box trucks, cargo vans",
+  "tagline": "Logistics that keep your business moving",
+  "design_notes": "Black and charcoal surfaces with a single hot red (#d00020) and a gold-arch emblem. Wet, overcast lighting with red stripe accents on buildings. Our bid template swaps the red for burgundy #812b3b plus gold #caa660.",
+  "confidence": "high"
+}

@@ -1,0 +1,42 @@
+{
+  "tenant": "aldis",
+  "website": "https://shipaldis.com/",
+  "verified": "Domain matches the HR-portal email domain; footer address 4629 Piedras Lanzar Dr, McKinney, TX 75070; page title and logo carry the same tagline 'Connecting Destinations, Building Trust.'",
+  "colors": [
+    {
+      "hex": "#17B1CF",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#0D2F59",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#FFFFFF",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#1D1D1D",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#17B4D2",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Raleway",
+    "Roboto"
+  ],
+  "imagery": "Real stock photos treated in grayscale (semi trailer, white Sprinter van, package hand-off, loading-dock doors, US flag at a border crossing) with bright cyan icon tiles over them; no illustrations. Daytime, industrial, little people.",
+  "mood": "bright clean cyan-navy corporate",
+  "fleet": "mixed: dry-van semis plus cargo vans (logo shows a box truck; site claims 400+ asset-owned units)",
+  "tagline": "Connecting Destinations, Building Trust.",
+  "design_notes": "Cyan header bar with a diagonal cut on its left end and a small skewed cyan parallelogram above section titles. Cyan square icon badges overlapping grayscale photos; navy (#0D2F59) overlays at 70-85% opacity on photos. Logo truck is flat two-tone: cyan cab, navy swoosh-shaped box with cyan horizontal speed lines.",
+  "confidence": "high"
+}

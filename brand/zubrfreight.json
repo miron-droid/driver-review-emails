@@ -1,0 +1,19 @@
+{
+  "tenant": "zubrfreight",
+  "website": null,
+  "verified": "No website: zubrllc.com has no DNS record, and zubr.us belongs to an unrelated company. Carrier directories list Zubr Freight LLC at USDOT 3162303, 5230 Carversville Rd, Doylestown, PA (Bucks County). Job ads list it in Philadelphia. No social profiles found.",
+  "colors": [
+    {
+      "hex": "#262727",
+      "role": "primary",
+      "source": "logo"
+    }
+  ],
+  "fonts": [],
+  "imagery": "No web imagery found. Job postings describe owner-operators with cargo vans and straight trucks (local, OTR, Canada).",
+  "mood": "bold, plain, no-nonsense",
+  "fleet": "mixed: cargo vans, straight trucks",
+  "tagline": null,
+  "design_notes": "The only brand asset is a heavy black 'ZUBR' wordmark. Keep it monochrome and blunt: black on white with no added color. ('Zubr' is the European bison, a possible motif, but the logo does not use it.)",
+  "confidence": "low"
+}

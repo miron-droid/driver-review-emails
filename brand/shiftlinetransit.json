@@ -1,0 +1,43 @@
+{
+  "tenant": "shiftlinetransit",
+  "website": "https://shiftlinetransit.com/",
+  "verified": "Domain matches the HR-portal email domain; site shows MC 1730792 / USDOT 4407142, 5383 Southern Blvd Ste 464, Dallas, TX 75240; links to shiftlinetransit.mycarrierlink.com and CargoETL/CargoAI; same black-gold crest logo.",
+  "colors": [
+    {
+      "hex": "#101110",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#D6B66A",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#F3F2ED",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#A69367",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#34362E",
+      "role": "accent",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Outfit",
+    "Inter",
+    "IBM Plex Mono"
+  ],
+  "imagery": "Cinematic, photo-real shots of a black straight box truck with a gold side stripe: a studio shot on wet black floor, the truck at dusk on a highway with the Dallas skyline, and the cab interior. Scroll videos; no illustrations.",
+  "mood": "dark cinematic premium gold",
+  "fleet": "box trucks",
+  "tagline": "You call it, we haul it",
+  "design_notes": "Near-black warm background (#101110) with muted gold (#D6B66A) as the only accent: gold buttons with a clipped corner, gold monospace eyebrow labels, and large light-weight Outfit headlines. The crest logo is a shield badge with gold bevelled lettering and stars. Lighting is low-key with gold reflections, at dusk or night.",
+  "confidence": "high"
+}

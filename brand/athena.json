@@ -1,0 +1,68 @@
+{
+  "tenant": "athena",
+  "website": "https://athenatrucking.com",
+  "verified": true,
+  "colors": [
+    {
+      "hex": "#001304",
+      "role": "background",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#ecc764",
+      "role": "primary",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#b38530",
+      "role": "secondary",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#7f6435",
+      "role": "accent",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#0f0d07",
+      "role": "background",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#dec284",
+      "role": "secondary",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#e7c778",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#0a0c0d",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#f7f2e7",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#fdcc63",
+      "role": "primary",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Marcellus",
+    "Assistant",
+    "Space Grotesk"
+  ],
+  "imagery": "Live site is near-black with a gold Athena-crest poster, app screenshots and a capacity map, and no truck photos. The brandbook uses dark AI renders: the Acropolis, bronze chariots, and a matte-black box truck with gold chariot livery at a highway sunset.",
+  "mood": "dark, gilded, classical, quiet luxury",
+  "fleet": "mixed: cargo/Sprinter vans, box trucks, straight trucks (non-CDL, under 26,001 lbs)",
+  "tagline": "Freight, run like strategy. (brandbook: Wisdom of the ages. Strategy for the future.)",
+  "design_notes": "Gold on a very dark ground. In the brandbook the ground is Deep Olive #001304 (near-black green), not pure black, and every page is framed with a gold Greek meander (key) border. Display type is a Roman-capital serif (logo and Marcellus), and an Acropolis sunset or a chariot is the signature scene. Note: the brandbook body font is Assistant (sans); only headings and the logo are serif.",
+  "confidence": "high"
+}

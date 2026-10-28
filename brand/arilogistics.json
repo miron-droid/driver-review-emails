@@ -1,0 +1,51 @@
+{
+  "tenant": "arilogistics",
+  "website": "https://arilogistics.llc",
+  "verified": "Partly: arilogistics.llc (the HR-portal email domain) is live, but it is the site we built ourselves. It runs on our server 178.104.137.255 and shows USDOT 4158167 / MC 1597520. No independent ARI site turned up. Search hits are other companies (ARI Logistics Inc, Romeoville IL). So the only real brand evidence is the logo.",
+  "colors": [
+    {
+      "hex": "#780601",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#faa156",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#f68e47",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#ebb94a",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#a33041",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#0b0907",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#ece3d2",
+      "role": "text",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Inter"
+  ],
+  "imagery": "The live site (our build) has no real truck photos. It shows a dark world-map background, the ARI emblem and phone screenshots of the CargoAI app.",
+  "mood": "dark, premium, fast, precise",
+  "fleet": "mixed: cargo vans, sprinters, box/straight trucks",
+  "tagline": "Fast Delivery",
+  "design_notes": "The logo is the real brand. Echo its maroon-to-orange orbit swoosh, which reads as motion and speed. The gold-on-near-black liquid-glass palette is our own site styling, not theirs, so use it only as a secondary accent.",
+  "confidence": "medium"
+}

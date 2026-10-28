@@ -1,0 +1,49 @@
+{
+  "tenant": "skybridgels",
+  "website": "https://skybridgels.com",
+  "verified": true,
+  "colors": [
+    {
+      "hex": "#052749",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#c99a3d",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#031c32",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#f7f8f8",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#61717b",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#bc851b",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Archivo",
+    "IBM Plex Sans",
+    "IBM Plex Sans Condensed",
+    "Barlow Condensed (drivers page)"
+  ],
+  "imagery": "Cinematic Higgsfield video/stills of a semi truck crossing a long suspension bridge at golden-hour dusk, seen in aerial and low-angle views over water. There are no people in the hero, and the rest of the page uses airy white sections.",
+  "mood": "calm, cinematic, trustworthy, navy-gold",
+  "fleet": "semi trucks",
+  "tagline": "The bridge to your next delivery",
+  "design_notes": "The logo is a navy #052749 suspension bridge whose deck becomes a gold #bc851b road sweeping toward the viewer. Echo the bridge silhouette, a gold road line and dusk light on water. skybridgecompany.com is only a 'Coming Soon' page, so skybridgels.com (built by us) is the real site.",
+  "confidence": "high"
+}

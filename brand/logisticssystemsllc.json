@@ -1,0 +1,41 @@
+{
+  "tenant": "logisticssystemsllc",
+  "website": "https://logisticssystemsllc.com",
+  "verified": "Email domain resolves to 'Logistics Systems' site; footer: Logistics Systems LLC, 116 Buck Rd, Suite 3, Southampton, PA 18966. Logo SVG = LS mark with van + red swoosh.",
+  "colors": [
+    {
+      "hex": "#ff0000",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#292929",
+      "role": "secondary",
+      "source": "logo"
+    },
+    {
+      "hex": "#1a1c19",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#ffffff",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#b61616",
+      "role": "accent",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Poppins"
+  ],
+  "imagery": "Full-bleed real photo of a white European cab-over semi tractor on a coastal highway by the sea in bright daylight (motion blur), then a phone mockup of the ETL Cargo app and simple red line icons. No people.",
+  "mood": "simple, clean, red-and-white, owner-operator",
+  "fleet": "mixed: sprinter vans + box trucks up to 26ft (per FAQ); hero photo shows a semi",
+  "tagline": "First ever owner-operator ecosystem",
+  "design_notes": "Very plain white layout with charcoal #292929 text and pure red #ff0000 CTA buttons and outline icons; hero image has large rounded bottom corners. Logo = bold 'LS' with a van silhouette and red swoosh, 'SYSTEMS' in red.",
+  "confidence": "high"
+}

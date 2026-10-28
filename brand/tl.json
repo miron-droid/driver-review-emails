@@ -1,0 +1,62 @@
+{
+  "tenant": "tl",
+  "website": "https://trilumina.us",
+  "verified": "Partly. The name matches ('Copyright © 2025 Trilumina Logistics'), the fleet copy matches (cargo vans, box trucks, sprinters) and the site palette matches the blue/violet/cyan logo. The site gives no address, so Philadelphia is unconfirmed. Phone/email are placeholders and service blurbs are lorem ipsum. triluminalogistics.com is a 'Coming Soon' page.",
+  "colors": [
+    {
+      "hex": "#0023b1",
+      "role": "primary",
+      "source": "css"
+    },
+    {
+      "hex": "#0057db",
+      "role": "secondary",
+      "source": "css"
+    },
+    {
+      "hex": "#00c2ff",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#621ffa",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#ebf5f9",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#0a2434",
+      "role": "text",
+      "source": "css"
+    },
+    {
+      "hex": "#0e35b6",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#512cce",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#3bb8f2",
+      "role": "accent",
+      "source": "logo"
+    }
+  ],
+  "fonts": [
+    "Michroma",
+    "Montserrat"
+  ],
+  "imagery": "Real stock photos in daylight and dusk: blue Freightliner reefer semis at a dock, a highway at dusk with motion-blurred trucks and light trails, a driver inspecting a truck, a smiling call-center agent and warehouse pallets.",
+  "mood": "bright, techy, fast, clean, confident",
+  "fleet": "mixed: cargo vans, sprinters, box trucks",
+  "tagline": "Fast & Reliable Logistics Solutions Across the U.S",
+  "design_notes": "Saturated royal blue (#0023b1) as the dominant field, with violet-to-cyan gradient highlights taken from the '7'-shaped logo. Wide, techy Michroma headings, and speed and light-trail motion.",
+  "confidence": "medium"
+}

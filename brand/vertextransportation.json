@@ -1,0 +1,47 @@
+{
+  "tenant": "vertextransportation",
+  "website": "https://vertextransportation.llc",
+  "verified": true,
+  "colors": [
+    {
+      "hex": "#002166",
+      "role": "primary",
+      "source": "logo"
+    },
+    {
+      "hex": "#db0d3d",
+      "role": "accent",
+      "source": "logo"
+    },
+    {
+      "hex": "#f4f6f9",
+      "role": "background",
+      "source": "brandbook"
+    },
+    {
+      "hex": "#171717",
+      "role": "background",
+      "source": "css"
+    },
+    {
+      "hex": "#e5b64b",
+      "role": "accent",
+      "source": "css"
+    },
+    {
+      "hex": "#ebebeb",
+      "role": "text",
+      "source": "css"
+    }
+  ],
+  "fonts": [
+    "Montserrat",
+    "Unbounded"
+  ],
+  "imagery": "Real stock photos in warm interior light: movers in navy uniforms and caps loading cardboard boxes from a cargo van, and warehouse workers with boxes and a tablet. No trucks on highways and no night scenes.",
+  "mood": "bold, confident, industrial, no-nonsense",
+  "fleet": "cargo vans",
+  "tagline": "Moving Freight, Powering Business (eyebrow: Safe, Fast, and Dependable)",
+  "design_notes": "The mark is a sharp V of navy #002166, black and crimson #db0d3d diagonal speed stripes over wide geometric 'VERTEX TRANSPORTATIONS' lettering. Their documents (Albatross brandbook) use white paper, thin gray rules and #f4f6f9 panels. The live site is a different palette: a dark charcoal Tilda template with gold #e5b64b and Unbounded wide caps. For the email, follow the logo and documents (navy plus crimson on white) and echo the diagonal stripe motif.",
+  "confidence": "medium"
+}
