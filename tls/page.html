@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>How is TLS treating you?</title>
+<title>How was your week?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Прототип новой страницы /review/<код> для TLS. Данные выдуманные (Marcus, 5 грузов, диспетчер Kevin Smith), ничего никуда не отправляется.
+<!-- Прототип еженедельной страницы /review/<код> для TLS. Данные выдуманные (Marcus, диспетчер Kevin Smith), ничего никуда не отправляется.
      Оценка приходит из письма: ?r=1..5. Ссылка Google ведёт сразу в окно отзыва (writereview?placeid=...). -->
 <style>
   :root {
@@ -73,12 +73,12 @@
     <div class="hero" style="background-image:url('img/review-hero.jpg')" role="img" aria-label="A cargo van on an open highway at sunrise"><span class="demo">Prototype · sample data</span></div>
     <div class="pad">
       <div class="brand"><img src="img/tls-mark-128.png" width="26" height="26" alt="">TARGET LOGISTICS SOLUTION</div>
-      <h1>Marcus, 5 loads with TLS</h1>
+      <h1>Marcus, how was this week?</h1>
       <p class="sub">Three more taps after the stars and you're done.</p>
       <div class="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <section class="q" data-q="company">
-        <h2>How would you rate TLS so far?</h2>
+        <h2>This week with TLS</h2>
         <div class="stars" role="radiogroup" aria-label="Rating">
           <button class="star" data-v="1" aria-label="1 star">&#9733;</button>
           <button class="star" data-v="2" aria-label="2 stars">&#9733;</button>
@@ -91,7 +91,7 @@
 
       <section class="q later" data-q="dispatcher">
         <h2>Kevin Smith, your dispatcher</h2>
-        <p class="hint">Picks up when you call, finds decent loads, backs you up with brokers?</p>
+        <p class="hint">This week: picked up when you called, found decent loads, had your back with brokers?</p>
         <div class="opts">
           <button class="opt" data-v="great">Great</button>
           <button class="opt" data-v="okay">Okay</button>
@@ -100,7 +100,7 @@
       </section>
 
       <section class="q later" data-q="pay">
-        <h2>Your Thursday settlement</h2>
+        <h2>This Thursday's settlement</h2>
         <p class="hint">Right amount, on time?</p>
         <div class="opts">
           <button class="opt" data-v="always">Every time</button>
@@ -124,7 +124,7 @@
       </section>
 
       <section class="q" style="border-bottom:0">
-        <h2>Anything else?</h2>
+        <h2>Anything from this week?</h2>
         <p class="hint">Optional. Say it the way you'd say it on the phone</p>
         <textarea id="note" aria-label="Anything else" placeholder="e.g. waited 4 hours at the Allentown dock and nobody called the broker"></textarea>
       </section>
@@ -211,12 +211,13 @@ refresh();
 
 document.getElementById('send').addEventListener('click', () => {
   // Google показываем, только если всё хорошо: 4-5 звёзд, диспетчер не «Not great», расчёт не «Often off»
+  // Google зовём не чаще одного раза: если водитель уже переходил (google_clicked_at), блок не показываем.
   const happy = answers.company[0] >= 4 && answers.dispatcher[0] !== 'bad' && answers.pay[0] !== 'late';
   document.getElementById('form').style.display = 'none';
   document.getElementById('done').style.display = 'block';
   document.getElementById('doneText').textContent = happy
-    ? "Good to hear it's working. Your answers are with the driver team."
-    : "That's the kind of answer we need. It's with the driver team now.";
+    ? "Good week, good to hear. See you next week."
+    : "Thanks for telling us straight. It's with the driver team now.";
   document.getElementById('google').hidden = !happy;
   document.getElementById('call').hidden = happy;
   window.scrollTo(0, 0);
