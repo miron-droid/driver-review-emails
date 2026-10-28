@@ -16,9 +16,10 @@
   "logo_mail": "img/adit/logo-mail.png",
   "logo_mail_w": 82,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": null,
-  "brand_source": "low"
+  "brand_source": "low",
+  "hero_mail": "img/adit/hero-mail.jpg"
  },
  {
   "id": "aldis",
@@ -37,9 +38,10 @@
   "logo_mail": "img/aldis/logo-mail.png",
   "logo_mail_w": 130,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://shipaldis.com/",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/aldis/hero-mail.jpg"
  },
  {
   "id": "alliancelogistics",
@@ -58,9 +60,10 @@
   "logo_mail": "img/alliancelogistics/logo-mail.png",
   "logo_mail_w": 63,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://alliancelogisticsllc.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/alliancelogistics/hero-mail.jpg"
  },
  {
   "id": "annlogistics",
@@ -79,9 +82,10 @@
   "logo_mail": "img/annlogistics/logo-mail.png",
   "logo_mail_w": 83,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://www.annlogistics.com/",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/annlogistics/hero-mail.jpg"
  },
  {
   "id": "arilogistics",
@@ -100,9 +104,10 @@
   "logo_mail": "img/arilogistics/logo-mail.png",
   "logo_mail_w": 80,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://arilogistics.llc",
-  "brand_source": "medium"
+  "brand_source": "medium",
+  "hero_mail": "img/arilogistics/hero-mail.jpg"
  },
  {
   "id": "athena",
@@ -121,9 +126,10 @@
   "logo_mail": "img/athena/logo-mail.png",
   "logo_mail_w": 41,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://athenatrucking.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/athena/hero-mail.jpg"
  },
  {
   "id": "atlas",
@@ -142,9 +148,10 @@
   "logo_mail": "img/atlas/logo-mail.png",
   "logo_mail_w": 64,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://atlasbridgefrieght.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/atlas/hero-mail.jpg"
  },
  {
   "id": "cnulogistics",
@@ -163,9 +170,10 @@
   "logo_mail": "img/cnulogistics/logo-mail.png",
   "logo_mail_w": 50,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://cnulogistics.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/cnulogistics/hero-mail.jpg"
  },
  {
   "id": "jrtrans",
@@ -184,9 +192,10 @@
   "logo_mail": "img/jrtrans/logo-mail.png",
   "logo_mail_w": 75,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": null,
-  "brand_source": "low"
+  "brand_source": "low",
+  "hero_mail": "img/jrtrans/hero-mail.jpg"
  },
  {
   "id": "logisticssystemsllc",
@@ -205,9 +214,10 @@
   "logo_mail": "img/logisticssystemsllc/logo-mail.png",
   "logo_mail_w": 62,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://logisticssystemsllc.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/logisticssystemsllc/hero-mail.jpg"
  },
  {
   "id": "odyssey",
@@ -226,9 +236,10 @@
   "logo_mail": "img/odyssey/logo-mail.png",
   "logo_mail_w": 100,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://odysseyexpress.us",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/odyssey/hero-mail.jpg"
  },
  {
   "id": "pennlogisticsllc",
@@ -247,9 +258,10 @@
   "logo_mail": "img/pennlogisticsllc/logo-mail.png",
   "logo_mail_w": 68,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": null,
-  "brand_source": "low"
+  "brand_source": "low",
+  "hero_mail": "img/pennlogisticsllc/hero-mail.jpg"
  },
  {
   "id": "redmax",
@@ -268,9 +280,10 @@
   "logo_mail": "img/redmax/logo-mail.png",
   "logo_mail_w": 157,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://redmaxllc.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/redmax/hero-mail.jpg"
  },
  {
   "id": "rulinglogistics",
@@ -289,9 +302,10 @@
   "logo_mail": "img/rulinglogistics/logo-mail.png",
   "logo_mail_w": 63,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://www.ruling-logistics.com/",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/rulinglogistics/hero-mail.jpg"
  },
  {
   "id": "shiftlinetransit",
@@ -310,9 +324,10 @@
   "logo_mail": "img/shiftlinetransit/logo-mail.png",
   "logo_mail_w": 69,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://shiftlinetransit.com/",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/shiftlinetransit/hero-mail.jpg"
  },
  {
   "id": "skybridgels",
@@ -331,9 +346,10 @@
   "logo_mail": "img/skybridgels/logo-mail.png",
   "logo_mail_w": 96,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://skybridgels.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/skybridgels/hero-mail.jpg"
  },
  {
   "id": "tl",
@@ -352,9 +368,10 @@
   "logo_mail": "img/tl/logo-mail.png",
   "logo_mail_w": 64,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://trilumina.us",
-  "brand_source": "medium"
+  "brand_source": "medium",
+  "hero_mail": "img/tl/hero-mail.jpg"
  },
  {
   "id": "tls",
@@ -368,15 +385,17 @@
   "portal": "tls.mycarrierlink.com",
   "sample": {
    "driver": "Derek",
-   "dispatcher": null
+   "dispatcher": null,
+   "sender": "Hazel"
   },
   "logo_mail": "img/tls/logo-mail.png",
   "logo_mail_w": 59,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "phone": "+12674946323",
   "phone_text": "(267) 494-6323",
-  "custom_template": true
+  "hero_mail": "img/tls/hero-mail.jpg",
+  "email": "hr@tlslogistics.us"
  },
  {
   "id": "ursaexpress",
@@ -395,9 +414,10 @@
   "logo_mail": "img/ursaexpress/logo-mail.png",
   "logo_mail_w": 113,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "http://ursaexpress.com",
-  "brand_source": "high"
+  "brand_source": "high",
+  "hero_mail": "img/ursaexpress/hero-mail.jpg"
  },
  {
   "id": "vertexexpedite",
@@ -416,9 +436,10 @@
   "logo_mail": "img/vertexexpedite/logo-mail.png",
   "logo_mail_w": 88,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://vertexexpedite.com",
-  "brand_source": "medium"
+  "brand_source": "medium",
+  "hero_mail": "img/vertexexpedite/hero-mail.jpg"
  },
  {
   "id": "vertextransportation",
@@ -437,9 +458,10 @@
   "logo_mail": "img/vertextransportation/logo-mail.png",
   "logo_mail_w": 83,
   "logo_mail_h": 64,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": "https://vertextransportation.llc",
-  "brand_source": "medium"
+  "brand_source": "medium",
+  "hero_mail": "img/vertextransportation/hero-mail.jpg"
  },
  {
   "id": "zubrfreight",
@@ -458,8 +480,9 @@
   "logo_mail": "img/zubrfreight/logo-mail.png",
   "logo_mail_w": 133,
   "logo_mail_h": 44,
-  "subject": "{first_name}, how was your week?",
+  "subject": "Week of {week}: how did it go, {first_name}?",
   "website": null,
-  "brand_source": "low"
+  "brand_source": "low",
+  "hero_mail": "img/zubrfreight/hero-mail.jpg"
  }
 ]

@@ -4,7 +4,7 @@
 
 Для каждой компании пишет <id>/template.html (вставлять в портал) и
 <id>/preview.html (выдуманные данные, звёзды ведут на общую страницу).
-Компании с custom_template (TLS) не трогает: их шаблон сделан руками.
+Плейсхолдеры портала: {first_name} {link} {week} {sender_name} {pause_link}.
 """
 
 import html
@@ -26,26 +26,40 @@ stars = "".join(STAR.format(n=n, s="s" if n > 1 else "") for n in range(1, 6))
 
 for c in companies:
     os.makedirs(c["id"], exist_ok=True)
-    if not c.get("custom_template"):
-        out = base
-        for key, value in {
-            "[[BASE]]": BASE,
-            "[[HERO]]": c["hero"],
-            "[[HERO_ALT]]": HERO_ALT,
-            "[[LOGO]]": c["logo_mail"],
-            "[[LOGO_W]]": str(c["logo_mail_w"]),
-            "[[LOGO_H]]": str(c["logo_mail_h"]),
-            "[[NAME]]": html.escape(c["name"]),
-            "[[SHORT]]": html.escape(c["short"]),
-            "[[ACCENT]]": c["accent"],
-            "[[STARS]]": stars,
-        }.items():
-            out = out.replace(key, value)
-        open(f"{c['id']}/template.html", "w").write(out)
+    contacts = ""
+    if c.get("phone"):
+        contacts += (
+            f'<br><a href="tel:{c["phone"]}" style="color:{c["accent"]};text-decoration:none;">'
+            f'{c["phone_text"]}</a>'
+        )
+    if c.get("email"):
+        contacts += (
+            f'{" &middot; " if c.get("phone") else "<br>"}<a href="mailto:{c["email"]}" '
+            f'style="color:{c["accent"]};text-decoration:none;">{c["email"]}</a>'
+        )
+    out = base
+    for key, value in {
+        "[[BASE]]": BASE,
+        "[[HERO]]": c["hero_mail"],
+        "[[HERO_ALT]]": HERO_ALT,
+        "[[LOGO]]": c["logo_mail"],
+        "[[LOGO_W]]": str(c["logo_mail_w"]),
+        "[[LOGO_H]]": str(c["logo_mail_h"]),
+        "[[NAME]]": html.escape(c["name"]),
+        "[[SHORT]]": html.escape(c["short"]),
+        "[[ACCENT]]": c["accent"],
+        "[[STARS]]": stars,
+        "[[CONTACTS]]": contacts,
+    }.items():
+        out = out.replace(key, value)
+    open(f"{c['id']}/template.html", "w").write(out)
 
     template = open(f"{c['id']}/template.html").read()
     preview = (
         template.replace("{first_name}", c["sample"]["driver"])
+        .replace("{week}", "Oct 27")
+        .replace("{sender_name}", c["sample"].get("sender", "Driver team"))
+        .replace("{pause_link}", "#pause")
         .replace("{link}?r=", f"../page/index.html?c={c['id']}&r=")
         .replace("{link}", f"../page/index.html?c={c['id']}")
         .replace("<head>", '<head>\n<base target="_blank">', 1)

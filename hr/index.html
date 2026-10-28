@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Неделя водителей TLS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Прототип: что эйчар видит в понедельник в разделе отзывов портала и в письме-сводке в 9:00.
+     Всё считается само из ответов водителей, эйчар ничего не настраивает. Цифры и имена выдуманные. -->
+<style>
+  :root { --bg:#f3f4f2; --card:#fff; --ink:#15211f; --body:#3a4745; --muted:#66716f; --line:#e2e6e4; --accent:#2a8371; --bad:#c0362c; --bad-bg:#fbeceb; --warn:#9a6700; --warn-bg:#fdf4dc; --good:#1f7a4d; --good-bg:#e7f4ec; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--body); font:15px/1.45 Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width:1040px; margin:0 auto; padding:28px 16px 64px; }
+  .tag { display:inline-block; font-size:12px; font-weight:600; color:var(--warn); background:var(--warn-bg); padding:3px 8px; border-radius:6px; }
+  header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:12px; margin:10px 0 20px; }
+  h1 { margin:0; font-size:28px; letter-spacing:-.4px; color:var(--ink); }
+  .when { color:var(--muted); font-size:14px; }
+  .kpis { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+  .kpi .n { font-size:30px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
+  .kpi .l { font-size:13px; color:var(--muted); }
+  .kpi .d { font-size:13px; font-weight:600; margin-top:2px; }
+  .up { color:var(--good); } .down { color:var(--bad); }
+  .kpi.alert { border-color:#f0c2be; background:var(--bad-bg); }
+  .kpi.alert .n { color:var(--bad); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 18px 8px; margin-top:16px; }
+  h2 { margin:0 0 4px; font-size:18px; color:var(--ink); }
+  .sub { margin:0 0 12px; color:var(--muted); font-size:14px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid2 section { margin-top:16px; }
+  .call { display:grid; grid-template-columns:1fr auto; gap:6px 14px; padding:14px 0; border-top:1px solid var(--line); }
+  .call:first-of-type { border-top:0; }
+  .who { font-weight:600; color:var(--ink); }
+  .who small { font-weight:400; color:var(--muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .chip { font-size:12px; font-weight:600; padding:3px 8px; border-radius:6px; background:#eef1f0; color:var(--body); }
+  .chip.bad { background:var(--bad-bg); color:var(--bad); }
+  .chip.warn { background:var(--warn-bg); color:var(--warn); }
+  .quote { grid-column:1 / -1; margin:2px 0 0; padding:8px 12px; border-left:3px solid var(--line); color:var(--body); font-size:14px; background:#fafbfa; border-radius:0 8px 8px 0; }
+  .actions { display:flex; flex-direction:column; gap:6px; align-items:stretch; }
+  .btn { appearance:none; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; font-size:14px; font-weight:600; padding:8px 12px; border-radius:10px; text-decoration:none; text-align:center; cursor:pointer; white-space:nowrap; }
+  .btn.primary { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .btn[aria-pressed="true"] { background:var(--good-bg); color:var(--good); border-color:#bfe0cc; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { text-align:left; font-size:12px; font-weight:600; color:var(--muted); padding:6px 8px; border-bottom:1px solid var(--line); }
+  td { padding:9px 8px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  td.num, th.num { text-align:right; }
+  tr.flag td:first-child { box-shadow:inset 3px 0 0 var(--bad); }
+  .bar { display:grid; grid-template-columns:120px 1fr 32px; align-items:center; gap:10px; margin:8px 0; font-size:14px; }
+  .bar i { display:block; height:10px; border-radius:5px; background:var(--accent); }
+  .bar b { text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .feed p { margin:0; padding:10px 0; border-top:1px solid var(--line); font-size:14px; }
+  .feed p:first-child { border-top:0; }
+  .feed span { color:var(--muted); font-size:12px; display:block; }
+  .note { font-size:13px; color:var(--muted); margin:14px 2px 0; }
+  @media (max-width:760px) { .kpis { grid-template-columns:1fr 1fr; } .grid2 { grid-template-columns:1fr; } .call { grid-template-columns:1fr; } .actions { flex-direction:row; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="tag">Прототип · выдуманные данные</span>
+  <header>
+    <div>
+      <h1>Неделя водителей TLS</h1>
+      <div class="when">27 окт – 2 нояб · приходит эйчару письмом в понедельник в 9:00 и висит в разделе «Отзывы»</div>
+    </div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><div class="l">Ответили</div><div class="n">46 из 128</div><div class="d up">36% · ▲ 4 п. к прошлой</div></div>
+    <div class="kpi"><div class="l">Средняя оценка недели</div><div class="n">4,3 ★</div><div class="d up">▲ 0,2</div></div>
+    <div class="kpi alert"><div class="l">Позвонить сегодня</div><div class="n">3</div><div class="d">плохая неделя или не тот расчёт</div></div>
+    <div class="kpi"><div class="l">Исправили то, на что жаловались</div><div class="n">4 из 6</div><div class="d">по ответам самих водителей</div></div>
+  </div>
+
+  <section>
+    <h2>Позвонить сегодня</h2>
+    <p class="sub">Водители, у которых неделя прошла плохо. Уведомление об этом пришло вам сразу после ответа, здесь те, кому ещё не звонили.</p>
+    <div class="call">
+      <div>
+        <div class="who">Luis Ortega <small>· 2 ★ · диспетчер Robert Paul</small></div>
+        <div class="chips"><span class="chip bad">Расчёт: нет</span><span class="chip bad">Диспетчер: не очень</span><span class="chip warn">2-я плохая неделя подряд</span></div>
+      </div>
+      <div class="actions"><a class="btn primary" href="tel:+10000000000">Позвонить</a><button class="btn" aria-pressed="false">Поговорили</button></div>
+      <p class="quote">«Расчёт за прошлую неделю пришёл на $180 меньше, Роберт не отвечает с четверга»</p>
+    </div>
+    <div class="call">
+      <div>
+        <div class="who">Marcus Hill <small>· 3 ★ · диспетчер Kevin Smith</small></div>
+        <div class="chips"><span class="chip bad">Расчёт: нет</span><span class="chip">Исправить: оплата</span></div>
+      </div>
+      <div class="actions"><a class="btn primary" href="tel:+10000000000">Позвонить</a><button class="btn" aria-pressed="false">Поговорили</button></div>
+    </div>
+    <div class="call">
+      <div>
+        <div class="who">Dmitri Volkov <small>· 1 ★ · диспетчер Robert Paul</small></div>
+        <div class="chips"><span class="chip bad">Диспетчер: не очень</span><span class="chip">Исправить: грузы, ставки</span></div>
+      </div>
+      <div class="actions"><a class="btn primary" href="tel:+10000000000">Позвонить</a><button class="btn" aria-pressed="false">Поговорили</button></div>
+      <p class="quote">«Третью неделю стою по два дня без груза»</p>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section>
+      <h2>Диспетчеры</h2>
+      <p class="sub">Сколько водителей ответили про каждого и как. Диспетчер видит только общий итог, без имён.</p>
+      <table>
+        <thead><tr><th>Диспетчер</th><th class="num">Ответов</th><th class="num">Отлично</th><th class="num">Не очень</th><th class="num">К прошлой</th></tr></thead>
+        <tbody>
+          <tr class="flag"><td>Robert Paul</td><td class="num">9</td><td class="num">33%</td><td class="num">4</td><td class="num down">▼</td></tr>
+          <tr><td>Kevin Smith</td><td class="num">11</td><td class="num">82%</td><td class="num">0</td><td class="num up">▲</td></tr>
+          <tr><td>Veronica Collins</td><td class="num">8</td><td class="num">88%</td><td class="num">0</td><td class="num">=</td></tr>
+          <tr><td>Chris Martin</td><td class="num">7</td><td class="num">71%</td><td class="num">1</td><td class="num">=</td></tr>
+          <tr><td>Ryan Carter</td><td class="num">6</td><td class="num">67%</td><td class="num">1</td><td class="num up">▲</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Что исправить в первую очередь</h2>
+      <p class="sub">Что водители отметили на этой неделе</p>
+      <div class="bar"><span>Оплата</span><i style="width:100%"></i><b>9</b></div>
+      <div class="bar"><span>Ставки</span><i style="width:67%"></i><b>6</b></div>
+      <div class="bar"><span>Больше грузов</span><i style="width:56%"></i><b>5</b></div>
+      <div class="bar"><span>Диспетчер</span><i style="width:44%"></i><b>4</b></div>
+      <div class="bar"><span>Приложение</span><i style="width:22%"></i><b>2</b></div>
+      <div class="bar"><span>Документы</span><i style="width:11%"></i><b>1</b></div>
+      <div class="bar"><span>Всё хорошо</span><i style="width:100%;background:#9cc9b5"></i><b>19</b></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section>
+      <h2>Что водители написали</h2>
+      <p class="sub">Свободные ответы за неделю, новые сверху</p>
+      <div class="feed">
+        <p>«Kevin вчера в 11 вечера нашёл мне обратный груз, спасибо ему»<span>5 ★ · Andre B.</span></p>
+        <p>«Приложение не грузит фото BOL на трассе»<span>4 ★ · Sam K.</span></p>
+        <p>«Расчёт за прошлую неделю пришёл на $180 меньше»<span>2 ★ · Luis O.</span></p>
+        <p>«Хотелось бы знать ставку до того, как соглашаться на груз»<span>3 ★ · Ray T.</span></p>
+      </div>
+    </section>
+    <section>
+      <h2>Google</h2>
+      <p class="sub">Ссылку видят только те, у кого неделя прошла хорошо, и только один раз</p>
+      <div class="bar"><span>Позвали</span><i style="width:100%"></i><b>14</b></div>
+      <div class="bar"><span>Перешли</span><i style="width:50%"></i><b>7</b></div>
+      <p class="note">Отзывы в самом Google мы не видим, видим только переход.</p>
+    </section>
+  </div>
+
+  <p class="note">Эйчару ничего настраивать не нужно: опрос уходит сам раз в неделю по настройкам отзывов, всё на этой странице считается само из ответов.</p>
+</div>
+<script>
+document.querySelectorAll('button[aria-pressed]').forEach(b => b.addEventListener('click', () => {
+  const on = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', on); b.textContent = on ? 'Поговорили ✓' : 'Поговорили';
+}));
+</script>
+</body>
+</html>

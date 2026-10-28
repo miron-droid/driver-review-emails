@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!--
   Прототип ОБЩЕЙ страницы /review/<код> для всех компаний HR-портала. Данные выдуманные, ничего никуда не отправляется.
-  Что страница берёт из GET /api/v1/review/{code} (поле → откуда в портале):
-    company      ← CompanySettings.organization_name
-    logo         ← CompanySettings.logo_url
-    hero         ← DriverReviewSettings.page_hero_url   (нет → полоса цвета компании с логотипом)
-    accent       ← DriverReviewSettings.page_accent_color (нет → #22262b)
-    google       ← google_review_url(CompanySettings.google_link), сразу окно оценки
-    dispatcher   ← последний диспетчер водителя (нет → «Your dispatcher»)
-    first_name   ← Driver.first_name
-  Оценка приходит из письма: ?r=1..5. В прототипе компания выбирается ?c=<тенант>, список в ../companies.json.
+  Что страница берёт из GET /api/v1/review/{code}:
+    company/short ← CompanySettings.organization_name      logo   ← CompanySettings.logo_url
+    hero/done     ← DriverReviewSettings.page_hero_url       accent ← DriverReviewSettings.page_accent_color
+    google        ← google_review_url(CompanySettings.google_link), показываем 1 раз за всё время
+    dispatcher    ← последний диспетчер водителя в CargoETL   first_name ← Driver.first_name
+    last_issue    ← что водитель отметил на прошлой неделе: pay | dispatcher | null
+    lang          ← язык, который водитель выбрал в прошлый раз (en | es | ru)
+  Каждый ответ сохраняется сразу по тапу (оценка из письма — при открытии страницы), кнопка внизу только закрывает опрос.
+  В прототипе: ?c=<тенант>&r=1..5&last=pay|dispatcher&lang=en|es|ru
 -->
 <style>
   :root {
@@ -27,10 +27,13 @@
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html, body { margin:0; background:var(--bg); }
   body { font-family:Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color:var(--body); font-size:16px; line-height:1.45; }
-  .proto { max-width:440px; margin:0 auto; padding:10px 12px; display:flex; gap:6px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--muted); }
-  .proto b { font-weight:600; color:var(--ink); margin-right:2px; }
+  .proto { max-width:440px; margin:0 auto; padding:10px 12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:12px; color:var(--muted); }
+  .proto b { font-weight:600; color:var(--ink); }
   .proto select { font:inherit; font-size:13px; padding:5px 8px; border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--ink); }
-  .app { max-width:440px; margin:0 auto; min-height:100vh; background:#fff; }
+  .app { max-width:440px; margin:0 auto; min-height:100vh; background:#fff; position:relative; }
+  .lang { position:absolute; top:12px; right:12px; z-index:3; display:flex; background:rgba(255,255,255,.92); border-radius:10px; padding:3px; box-shadow:0 1px 6px rgba(20,35,42,.15); }
+  .lang button { appearance:none; border:0; background:none; font:inherit; font-size:13px; font-weight:600; color:var(--muted); padding:6px 9px; border-radius:7px; cursor:pointer; min-width:40px; }
+  .lang button[aria-pressed="true"] { background:var(--ink); color:#fff; }
   .top { position:relative; height:150px; background:color-mix(in srgb, var(--accent) 12%, #fff) center 70%/cover no-repeat; }
   .top.photo::after { content:""; position:absolute; inset:auto 0 0 0; height:50px; background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.9)); }
   .top.plain { height:96px; border-bottom:3px solid var(--accent); }
@@ -40,29 +43,33 @@
   .co { font-size:13px; font-weight:600; letter-spacing:.3px; color:var(--muted); text-transform:uppercase; }
   h1 { font-size:27px; line-height:1.15; letter-spacing:-.4px; color:var(--ink); margin:6px 0 6px; font-weight:700; }
   .sub { margin:0; color:var(--muted); font-size:15px; }
-  .progress { display:flex; gap:6px; margin:22px 0 4px; }
+  .saved { display:flex; gap:8px; align-items:flex-start; margin:14px 0 0; padding:10px 12px; border-radius:12px; background:color-mix(in srgb, var(--accent) 8%, #fff); color:var(--ink); font-size:14px; }
+  .saved::before { content:"✓"; font-weight:700; color:var(--accent); }
+  .progress { display:flex; gap:6px; margin:20px 0 4px; }
   .progress i { flex:1; height:4px; border-radius:2px; background:var(--line); transition:background .25s; }
   .progress i.on { background:var(--accent); }
   .q { padding:20px 0 22px; border-bottom:1px solid var(--line); transition:opacity .2s; }
   .q.later { opacity:.38; pointer-events:none; }
+  .q.follow { margin-top:18px; padding:16px; border:0; border-radius:14px; background:#fff7e6; }
   .q h2 { font-size:18px; line-height:1.3; color:var(--ink); margin:0 0 4px; font-weight:600; }
   .q .hint { margin:0 0 12px; font-size:14px; color:var(--muted); }
   .stars { display:flex; justify-content:space-between; gap:4px; margin-top:6px; }
   .star { appearance:none; border:0; background:none; padding:4px 0; flex:1; cursor:pointer; font-size:44px; line-height:1; color:var(--star-off); transition:color .12s, transform .1s; }
   .star.on { color:var(--star); }
   .star:active { transform:scale(.92); }
-  .star:focus-visible, .opt:focus-visible { outline:3px solid color-mix(in srgb, var(--accent) 45%, #fff); outline-offset:2px; border-radius:10px; }
+  .star:focus-visible, .opt:focus-visible, .lang button:focus-visible { outline:3px solid color-mix(in srgb, var(--accent) 45%, #fff); outline-offset:2px; border-radius:10px; }
   .scale { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); padding:0 6px; }
   .opts { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; }
+  .opts.two { grid-template-columns:repeat(2, minmax(0,1fr)); }
   .opts.wrap { display:flex; flex-wrap:wrap; }
   .opt { appearance:none; border:0; background:var(--chip); color:var(--chip-ink); font:inherit; font-weight:600; font-size:15px; padding:14px 6px; border-radius:12px; cursor:pointer; min-height:50px; transition:background .15s, color .15s, transform .1s; }
+  .follow .opt { background:#fff; }
   .opts.wrap .opt { padding:11px 14px; min-height:44px; font-size:14px; }
   .opt:active { transform:scale(.97); }
   .opt[aria-pressed="true"] { background:var(--accent); color:#fff; }
   textarea { width:100%; min-height:96px; resize:vertical; border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; font:inherit; font-size:16px; color:var(--ink); background:#fbfcfd; }
   textarea:focus { outline:none; border-color:var(--accent); }
   .send { display:block; width:100%; margin:22px 0 10px; appearance:none; border:0; border-radius:14px; background:var(--accent); color:#fff; font:inherit; font-weight:600; font-size:17px; padding:16px; cursor:pointer; }
-  .send:disabled { background:#c3ccd0; cursor:not-allowed; }
   .fine { font-size:13px; color:var(--muted); margin:0 0 32px; text-align:center; }
   .done { display:none; }
   .done .pad { padding-bottom:40px; }
@@ -78,70 +85,79 @@
 </style>
 </head>
 <body>
-<nav class="proto" id="proto" aria-label="Prototype company switcher"><b>Prototype · sample data</b></nav>
+<nav class="proto" id="proto" aria-label="Prototype controls"><b>Prototype · sample data</b></nav>
 <div class="app">
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="en">EN</button><button data-lang="es">ES</button><button data-lang="ru">RU</button>
+  </div>
   <main id="form">
     <div class="top" id="top1"><div class="logo"><img id="logo1" alt=""></div></div>
     <div class="pad">
       <div class="co" id="co1"></div>
-      <h1 id="h1"></h1>
-      <p class="sub">Three more taps after the stars and you're done.</p>
+      <h1 data-t="h1"></h1>
+      <p class="sub" data-t="sub"></p>
+      <p class="saved" id="saved" hidden></p>
+
+      <section class="q follow" id="follow" hidden>
+        <h2 id="followQ"></h2>
+        <div class="opts two">
+          <button class="opt" data-f="fixed" data-t="followYes"></button>
+          <button class="opt" data-f="not" data-t="followNo"></button>
+        </div>
+      </section>
+
       <div class="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <section class="q" data-q="company">
-        <h2 id="qCompany"></h2>
-        <div class="stars" role="radiogroup" aria-label="Rating">
-          <button class="star" data-v="1" aria-label="1 star">&#9733;</button>
-          <button class="star" data-v="2" aria-label="2 stars">&#9733;</button>
-          <button class="star" data-v="3" aria-label="3 stars">&#9733;</button>
-          <button class="star" data-v="4" aria-label="4 stars">&#9733;</button>
-          <button class="star" data-v="5" aria-label="5 stars">&#9733;</button>
+        <h2 data-t="qCompany"></h2>
+        <div class="stars" role="radiogroup" data-t-aria="rating">
+          <button class="star" data-v="1">&#9733;</button><button class="star" data-v="2">&#9733;</button><button class="star" data-v="3">&#9733;</button><button class="star" data-v="4">&#9733;</button><button class="star" data-v="5">&#9733;</button>
         </div>
-        <div class="scale"><span>Rough</span><span>Great</span></div>
+        <div class="scale"><span data-t="rough"></span><span data-t="great"></span></div>
       </section>
 
       <section class="q later" data-q="dispatcher">
-        <h2 id="qDisp"></h2>
-        <p class="hint">This week: picked up when you called, found decent loads, had your back with brokers?</p>
+        <h2 data-t="qDisp"></h2>
+        <p class="hint" data-t="dispHint"></p>
         <div class="opts">
-          <button class="opt" data-v="great">Great</button>
-          <button class="opt" data-v="okay">Okay</button>
-          <button class="opt" data-v="bad">Not great</button>
+          <button class="opt" data-v="great" data-t="optGreat"></button>
+          <button class="opt" data-v="okay" data-t="optOkay"></button>
+          <button class="opt" data-v="bad" data-t="optBad"></button>
         </div>
       </section>
 
       <section class="q later" data-q="pay">
-        <h2>Your last settlement</h2>
-        <p class="hint">Right amount, on time?</p>
+        <h2 data-t="qPay"></h2>
+        <p class="hint" data-t="payHint"></p>
         <div class="opts">
-          <button class="opt" data-v="always">Yes</button>
-          <button class="opt" data-v="mostly">Almost</button>
-          <button class="opt" data-v="late">No</button>
+          <button class="opt" data-v="always" data-t="payYes"></button>
+          <button class="opt" data-v="mostly" data-t="payAlmost"></button>
+          <button class="opt" data-v="late" data-t="payNo"></button>
         </div>
       </section>
 
       <section class="q later" data-q="fix" data-multi>
-        <h2>If we could fix one thing</h2>
-        <p class="hint">Pick as many as you want</p>
+        <h2 data-t="qFix"></h2>
+        <p class="hint" data-t="fixHint"></p>
         <div class="opts wrap">
-          <button class="opt" data-v="rates">Rates</button>
-          <button class="opt" data-v="loads">More loads</button>
-          <button class="opt" data-v="pay">Pay</button>
-          <button class="opt" data-v="dispatch">Dispatch</button>
-          <button class="opt" data-v="paperwork">Paperwork</button>
-          <button class="opt" data-v="app">The app</button>
-          <button class="opt" data-v="nothing">Nothing, it's good</button>
+          <button class="opt" data-v="rates" data-t="fRates"></button>
+          <button class="opt" data-v="loads" data-t="fLoads"></button>
+          <button class="opt" data-v="pay" data-t="fPay"></button>
+          <button class="opt" data-v="dispatch" data-t="fDispatch"></button>
+          <button class="opt" data-v="paperwork" data-t="fPaper"></button>
+          <button class="opt" data-v="app" data-t="fApp"></button>
+          <button class="opt" data-v="nothing" data-t="fNothing"></button>
         </div>
       </section>
 
       <section class="q" style="border-bottom:0">
-        <h2>Anything from this week?</h2>
-        <p class="hint">Optional. Say it the way you'd say it on the phone</p>
-        <textarea id="note" aria-label="Anything from this week" placeholder="e.g. waited 4 hours at the dock and nobody called the broker"></textarea>
+        <h2 data-t="qNote"></h2>
+        <p class="hint" data-t="noteHint"></p>
+        <textarea id="note" data-t-ph="notePh" data-t-aria="qNote"></textarea>
       </section>
 
-      <button class="send" id="send" disabled></button>
-      <p class="fine" id="fine"></p>
+      <button class="send" id="send" data-t="send"></button>
+      <p class="fine" data-t="fine"></p>
     </div>
   </main>
 
@@ -149,72 +165,157 @@
     <div class="top" id="top2"><div class="logo"><img id="logo2" alt=""></div></div>
     <div class="pad">
       <div class="co" id="co2"></div>
-      <h1 id="doneTitle"></h1>
+      <h1 data-t="doneTitle"></h1>
       <p class="sub" id="doneText"></p>
       <div class="google" id="google" hidden>
-        <p>One more thing, only if you feel like it. Drivers look carriers up on Google before they call. A few words from someone who actually runs loads with us count more than anything we could write ourselves.</p>
-        <a class="gbtn" id="glink" target="_blank" rel="noopener"><span class="g">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span id="gtext"></span></a>
-        <p class="gnote">Google opens with the stars ready. About 20 seconds.</p>
+        <p data-t="gText"></p>
+        <a class="gbtn" id="glink" target="_blank" rel="noopener"><span class="g">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span data-t="gBtn"></span></a>
+        <p class="gnote" data-t="gNote"></p>
       </div>
-      <p class="call" id="call" hidden></p>
-      <div class="sign" id="sign"></div>
+      <p class="call" id="call" hidden><span data-t="call"></span> <a id="phone"></a></p>
+      <div class="sign" data-t="sign"></div>
     </div>
   </section>
 </div>
 
 <script>
-// Данные компаний: ../companies.json (названия, логотипы и ссылки Google из настроек портала 28.10.2026, картинки из Higgsfield).
-// Водитель и диспетчер выдуманные.
+const T = {
+  en: {
+    h1: '{driver}, how was this week?', sub: "Three more taps after the stars and you're done.",
+    saved: 'Your {n} {stars} for this week are saved. Three more taps if you have a minute.', star1: 'star', starN: 'stars',
+    followPay: 'Last week you said your settlement was off. Is it sorted now?', followDisp: "Last week you said dispatch wasn't great. Any better?",
+    followYes: 'Yes, better', followNo: 'Not yet', rating: 'Rating',
+    qCompany: 'This week with {short}', rough: 'Rough', great: 'Great',
+    qDisp: '{dispatcher}, your dispatcher', qDispNone: 'Your dispatcher',
+    dispHint: 'This week: picked up when you called, found decent loads, had your back with brokers?',
+    optGreat: 'Great', optOkay: 'Okay', optBad: 'Not great',
+    qPay: 'Your last settlement', payHint: 'Right amount, on time?', payYes: 'Yes', payAlmost: 'Almost', payNo: 'No',
+    qFix: 'If we could fix one thing', fixHint: 'Pick as many as you want',
+    fRates: 'Rates', fLoads: 'More loads', fPay: 'Pay', fDispatch: 'Dispatch', fPaper: 'Paperwork', fApp: 'The app', fNothing: "Nothing, it's good",
+    qNote: 'Anything from this week?', noteHint: "Optional. Say it the way you'd say it on the phone",
+    notePh: 'e.g. waited 4 hours at the dock and nobody called the broker',
+    send: 'Done', fine: 'Every tap is saved. Goes to the {short} driver team.',
+    doneTitle: 'Thanks, {driver}', doneGood: 'Good week, good to hear. See you next week.',
+    doneBad: "Thanks for telling us straight. It's with the driver team now, and next week we'll ask if it got better.",
+    gText: 'One more thing, only if you feel like it. Drivers look carriers up on Google before they call. A few words from someone who actually runs loads with us count more than anything we could write ourselves.',
+    gBtn: 'Rate {short} on Google', gNote: 'Google opens with the stars ready. About 20 seconds.',
+    call: 'If something needs fixing today, call', sign: 'Driver team, {name}',
+  },
+  es: {
+    h1: '{driver}, ¿cómo te fue esta semana?', sub: 'Tres toques más después de las estrellas y listo.',
+    saved: 'Tus {n} {stars} de esta semana ya están guardadas. Tres toques más si tienes un minuto.', star1: 'estrella', starN: 'estrellas',
+    followPay: 'La semana pasada dijiste que tu pago no estaba bien. ¿Ya se arregló?', followDisp: 'La semana pasada dijiste que el despacho no iba bien. ¿Mejoró?',
+    followYes: 'Sí, mejor', followNo: 'Todavía no', rating: 'Calificación',
+    qCompany: 'Esta semana con {short}', rough: 'Mala', great: 'Excelente',
+    qDisp: '{dispatcher}, tu despachador', qDispNone: 'Tu despachador',
+    dispHint: 'Esta semana: ¿contestó cuando llamaste, encontró buenas cargas, te apoyó con los brokers?',
+    optGreat: 'Muy bien', optOkay: 'Normal', optBad: 'No muy bien',
+    qPay: 'Tu último pago', payHint: '¿Monto correcto y a tiempo?', payYes: 'Sí', payAlmost: 'Casi', payNo: 'No',
+    qFix: 'Si pudiéramos arreglar una cosa', fixHint: 'Elige las que quieras',
+    fRates: 'Tarifas', fLoads: 'Más cargas', fPay: 'Pagos', fDispatch: 'Despacho', fPaper: 'Papeleo', fApp: 'La app', fNothing: 'Nada, todo bien',
+    qNote: '¿Algo más de esta semana?', noteHint: 'Opcional. Dilo como lo dirías por teléfono',
+    notePh: 'ej. esperé 4 horas en el muelle y nadie llamó al broker',
+    send: 'Listo', fine: 'Cada toque se guarda. Llega al equipo de conductores de {short}.',
+    doneTitle: 'Gracias, {driver}', doneGood: 'Buena semana, qué bueno. Nos vemos la próxima.',
+    doneBad: 'Gracias por decirlo claro. Ya lo tiene el equipo, y la próxima semana te preguntaremos si mejoró.',
+    gText: 'Una cosa más, solo si quieres. Los conductores buscan a las empresas en Google antes de llamar. Unas palabras de alguien que de verdad trabaja con nosotros valen más que cualquier cosa que escribamos.',
+    gBtn: 'Califica a {short} en Google', gNote: 'Google se abre con las estrellas listas. Unos 20 segundos.',
+    call: 'Si algo hay que arreglar hoy, llama al', sign: 'Equipo de conductores, {name}',
+  },
+  ru: {
+    h1: '{driver}, как прошла неделя?', sub: 'После звёзд ещё три нажатия, и всё.',
+    saved: 'Твои {n} {stars} за эту неделю сохранены. Ещё три нажатия, если есть минута.', star1: 'звезда', starN: 'звезды', starMany: 'звёзд',
+    followPay: 'На прошлой неделе ты писал, что с расчётом было не так. Исправили?', followDisp: 'На прошлой неделе ты писал, что с диспетчером было не очень. Стало лучше?',
+    followYes: 'Да, лучше', followNo: 'Пока нет', rating: 'Оценка',
+    qCompany: 'Неделя с {short}', rough: 'Плохо', great: 'Отлично',
+    qDisp: '{dispatcher}, твой диспетчер', qDispNone: 'Твой диспетчер',
+    dispHint: 'На этой неделе: брал трубку, находил нормальные грузы, вставал за тебя перед брокером?',
+    optGreat: 'Отлично', optOkay: 'Нормально', optBad: 'Не очень',
+    qPay: 'Последний расчёт', payHint: 'Сумма верная, пришёл вовремя?', payYes: 'Да', payAlmost: 'Почти', payNo: 'Нет',
+    qFix: 'Что исправить в первую очередь', fixHint: 'Можно выбрать несколько',
+    fRates: 'Ставки', fLoads: 'Больше грузов', fPay: 'Оплата', fDispatch: 'Диспетчер', fPaper: 'Документы', fApp: 'Приложение', fNothing: 'Ничего, всё хорошо',
+    qNote: 'Что-то ещё за неделю?', noteHint: 'Необязательно. Пиши как сказал бы по телефону',
+    notePh: 'например, ждал 4 часа на складе, и никто не позвонил брокеру',
+    send: 'Готово', fine: 'Каждое нажатие сохраняется. Ответы идут команде водителей {short}.',
+    doneTitle: 'Спасибо, {driver}', doneGood: 'Хорошая неделя, рады слышать. До следующей недели.',
+    doneBad: 'Спасибо, что сказал прямо. Это уже у команды, а через неделю спросим, стало ли лучше.',
+    gText: 'И ещё одно, только если хочется. Водители смотрят компанию в Google перед тем, как позвонить. Пара слов от того, кто реально у нас возит, значит больше всего, что мы напишем сами.',
+    gBtn: 'Оценить {short} в Google', gNote: 'Google откроется сразу со звёздами. Секунд 20.',
+    call: 'Если что-то нужно решить сегодня, звони', sign: 'Команда водителей, {name}',
+  },
+};
 const params = new URLSearchParams(location.search);
 const $ = (id) => document.getElementById(id);
+const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
 
 fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list => {
   const c = list.find(x => x.id === params.get('c')) || list.find(x => x.id === 'tls');
+  const V = { driver: c.sample.driver, dispatcher: c.sample.dispatcher, short: c.short, name: c.name };
+  let lang = T[params.get('lang')] ? params.get('lang') : 'en';
+  const lastIssue = params.get('last'); // pay | dispatcher
 
-  // Переключатель компаний (только в прототипе)
+  // Переключатели прототипа: компания и «что было на прошлой неделе»
   const sel = document.createElement('select');
   sel.setAttribute('aria-label', 'Company');
   list.forEach(x => { const o = document.createElement('option'); o.value = x.id; o.textContent = x.short; if (x.id === c.id) o.selected = true; sel.appendChild(o); });
   sel.addEventListener('change', () => { const p = new URLSearchParams(location.search); p.set('c', sel.value); location.search = p.toString(); });
-  $('proto').appendChild(sel);
+  const last = document.createElement('select');
+  last.setAttribute('aria-label', 'Last week');
+  [['', 'last week: all fine'], ['pay', 'last week: pay off'], ['dispatcher', 'last week: dispatch bad']].forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; if ((lastIssue || '') === v) o.selected = true; last.appendChild(o); });
+  last.addEventListener('change', () => { const p = new URLSearchParams(location.search); last.value ? p.set('last', last.value) : p.delete('last'); location.search = p.toString(); });
+  $('proto').append(sel, last);
 
   const asset = (path) => '../' + path;
   if (c.accent) document.documentElement.style.setProperty('--accent', c.accent);
-  const paintTop = (el, img) => {
-    if (img) { el.classList.add('photo'); el.style.backgroundImage = `url('${asset(img)}')`; }
-    else el.classList.add('plain');
-  };
-  paintTop($('top1'), c.hero);
-  paintTop($('top2'), c.done || c.hero);
+  const paintTop = (el, img) => { if (img) { el.classList.add('photo'); el.style.backgroundImage = `url('${asset(img)}')`; } else el.classList.add('plain'); };
+  paintTop($('top1'), c.hero); paintTop($('top2'), c.done || c.hero);
   ['logo1', 'logo2'].forEach(id => { $(id).src = asset(c.logo); $(id).alt = c.name; });
-  $('co1').textContent = c.name;
-  $('co2').textContent = c.name;
-  const driver = c.sample.driver, dispatcher = c.sample.dispatcher;
-  document.title = `How was your week at ${c.short}?`;
-  $('h1').textContent = `${driver}, how was this week?`;
-  $('qCompany').textContent = `This week with ${c.short}`;
-  $('qDisp').textContent = dispatcher ? `${dispatcher}, your dispatcher` : 'Your dispatcher';
-  $('send').textContent = `Send to ${c.short}`;
-  $('fine').textContent = `Goes to the ${c.short} driver team.`;
-  $('doneTitle').textContent = `Thanks, ${driver}`;
+  $('co1').textContent = c.name; $('co2').textContent = c.name;
   if (c.google) $('glink').href = c.google;
-  $('gtext').textContent = `Rate ${c.short} on Google`;
-  $('sign').textContent = `Driver team, ${c.name}`;
-  if (c.phone) $('call').innerHTML = `If something needs fixing today, call <a href="tel:${c.phone}">${c.phone_text}</a>.`;
+  if (c.phone) { $('phone').href = 'tel:' + c.phone; $('phone').textContent = c.phone_text; }
 
-  // Логика вопросов
   const answers = {};
+  let happy = null;
+  const r = parseInt(params.get('r'), 10);
+  const fromEmail = r >= 1 && r <= 5;
+
+  function render() {
+    const t = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+    document.querySelectorAll('[data-t]').forEach(el => {
+      const k = el.dataset.t;
+      if (k === 'qDisp' && !V.dispatcher) { el.textContent = t.qDispNone; return; }
+      el.textContent = fill(t[k], V);
+    });
+    document.querySelectorAll('[data-t-ph]').forEach(el => el.placeholder = t[el.dataset.tPh]);
+    document.querySelectorAll('[data-t-aria]').forEach(el => el.setAttribute('aria-label', t[el.dataset.tAria]));
+    document.querySelectorAll('.star').forEach(b => b.setAttribute('aria-label', `${b.dataset.v}`));
+    document.title = fill(t.qCompany, V);
+    if (answers.company && fromEmail) {
+      const n = answers.company[0];
+      const word = lang === 'ru' ? (n === 1 ? t.star1 : n < 5 ? t.starN : t.starMany) : (n === 1 ? t.star1 : t.starN);
+      $('saved').textContent = fill(t.saved, { n, stars: word });
+    }
+    if (lastIssue) $('followQ').textContent = lastIssue === 'pay' ? t.followPay : t.followDisp;
+    if (happy !== null) $('doneText').textContent = happy ? t.doneGood : t.doneBad;
+  }
+
+  // Прошлая неделя: если водитель на что-то жаловался, первым спрашиваем, исправили ли
+  if (lastIssue === 'pay' || lastIssue === 'dispatcher') {
+    $('follow').hidden = false;
+    $('follow').querySelectorAll('.opt').forEach(b => {
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => { answers.follow = [b.dataset.f]; $('follow').querySelectorAll('.opt').forEach(o => o.setAttribute('aria-pressed', o === b)); });
+    });
+  }
+
   const sections = [...document.querySelectorAll('.q[data-q]')];
   const bars = [...document.querySelectorAll('.progress i')];
   const has = (q) => answers[q] && answers[q].length;
   function refresh() {
     let open = true;
-    sections.forEach((s, i) => {
-      s.classList.toggle('later', !open);
-      bars[i].classList.toggle('on', !!has(s.dataset.q));
-      if (!has(s.dataset.q)) open = false;
-    });
-    $('send').disabled = !sections.every(s => has(s.dataset.q));
+    sections.forEach((s, i) => { s.classList.toggle('later', !open); bars[i].classList.toggle('on', !!has(s.dataset.q)); if (!has(s.dataset.q)) open = false; });
   }
   function next(section) {
     const n = sections[sections.indexOf(section) + 1];
@@ -240,19 +341,24 @@ fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list 
       refresh();
     });
   }));
-  const r = parseInt(params.get('r'), 10);
-  if (r >= 1 && r <= 5) setStars(r);
+
+  // Оценка из письма сохраняется сразу при открытии страницы
+  if (fromEmail) { setStars(r); $('saved').hidden = false; }
   refresh();
 
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; render(); }));
+  render();
+
   $('send').addEventListener('click', () => {
-    // Google зовём, только если неделя хорошая (4-5 звёзд, диспетчер не «Not great», расчёт не «No»),
-    // у компании есть ссылка Google и водитель ещё ни разу туда не переходил (google_clicked_at пуст).
-    const happy = answers.company[0] >= 4 && answers.dispatcher[0] !== 'bad' && answers.pay[0] !== 'late';
+    // Можно закончить в любой момент: что успел отметить, уже сохранено.
+    // Google зовём, только если неделя хорошая, у компании есть ссылка и водитель туда ещё не переходил.
+    const stars = answers.company ? answers.company[0] : 0;
+    happy = stars >= 4 && (answers.dispatcher || [''])[0] !== 'bad' && (answers.pay || [''])[0] !== 'late';
     $('form').style.display = 'none';
     $('done').style.display = 'block';
-    $('doneText').textContent = happy ? 'Good week, good to hear. See you next week.' : "Thanks for telling us straight. It's with the driver team now.";
     $('google').hidden = !(happy && c.google);
     $('call').hidden = happy || !c.phone;
+    render();
     window.scrollTo(0, 0);
   });
 });

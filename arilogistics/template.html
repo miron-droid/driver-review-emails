@@ -7,49 +7,46 @@
 <title>How was your week?</title>
 </head>
 <!-- Еженедельное письмо для Ari Logistics LLC. Собрано build.py из _base/template.html, руками не править.
-     Плейсхолдеры портала: {first_name} {link}. Звёзды ведут на {link}?r=1..5. -->
+     Плейсхолдеры портала: {first_name} {link} {week} {sender_name} {pause_link}. Звёзды ведут на {link}?r=1..5,
+     оценка сохраняется сразу при открытии страницы. -->
 <body style="margin:0;padding:0;background-color:#eef1f3;" bgcolor="#eef1f3">
-<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#eef1f3;">One tap for this week. About a minute.</div>
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#eef1f3;">One tap for the week of {week}. That's all it takes.</div>
 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#eef1f3" style="background-color:#eef1f3;">
-<tr><td align="center" style="padding:24px 12px;">
+<tr><td align="center" style="padding:16px 10px;">
 
 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="max-width:600px;background-color:#ffffff;border-radius:14px;overflow:hidden;">
 
 <tr><td style="padding:0;">
-<a href="{link}" style="text-decoration:none;"><img src="https://miron-droid.github.io/driver-review-emails/img/arilogistics/hero.jpg" width="600" height="250" alt="Illustration: a delivery vehicle on the road" style="display:block;border:0;width:100%;max-width:600px;height:auto;"></a>
+<a href="{link}" style="text-decoration:none;"><img src="https://miron-droid.github.io/driver-review-emails/img/arilogistics/hero-mail.jpg" width="600" height="170" alt="Illustration: a delivery vehicle on the road" style="display:block;border:0;width:100%;max-width:600px;height:auto;"></a>
 </td></tr>
 
-<tr><td style="padding:26px 32px 0 32px;">
+<tr><td style="padding:20px 28px 0 28px;">
 <img src="https://miron-droid.github.io/driver-review-emails/img/arilogistics/logo-mail.png" width="80" height="44" alt="Ari Logistics LLC" style="display:block;border:0;height:44px;width:80px;">
 </td></tr>
 
-<tr><td style="padding:18px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:26px;line-height:32px;color:#16232a;font-weight:bold;">
+<tr><td style="padding:14px 28px 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:25px;line-height:31px;color:#16232a;font-weight:bold;">
 How was your week, {first_name}?
 </td></tr>
 
-<tr><td style="padding:14px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:25px;color:#36474e;">
-Quick weekly check-in from the ARI Logistics driver team. Tap a star for this week. If something went sideways, a dispatcher who went quiet or a short settlement, the next screen is where to say it.
+<tr><td style="padding:6px 28px 12px 28px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#5f7076;">
+Week of {week} with ARI Logistics. One tap is enough.
 </td></tr>
 
-<tr><td style="padding:26px 32px 8px 32px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#16232a;font-weight:bold;">
-How was this week with ARI Logistics?
-</td></tr>
-
-<tr><td style="padding:0 26px;">
-<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f4f6f7" style="background-color:#f4f6f7;border-radius:12px;"><tr><td style="padding:10px 6px 12px 6px;">
+<tr><td style="padding:0 22px;">
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f4f6f7" style="background-color:#f4f6f7;border-radius:12px;"><tr><td style="padding:8px 6px 10px 6px;">
 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td width="20%" align="center" style="padding:4px;"><a href="{link}?r=1" style="display:block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:38px;line-height:44px;color:#f2b01e;" aria-label="1 star">&#9733;</a></td><td width="20%" align="center" style="padding:4px;"><a href="{link}?r=2" style="display:block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:38px;line-height:44px;color:#f2b01e;" aria-label="2 stars">&#9733;</a></td><td width="20%" align="center" style="padding:4px;"><a href="{link}?r=3" style="display:block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:38px;line-height:44px;color:#f2b01e;" aria-label="3 stars">&#9733;</a></td><td width="20%" align="center" style="padding:4px;"><a href="{link}?r=4" style="display:block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:38px;line-height:44px;color:#f2b01e;" aria-label="4 stars">&#9733;</a></td><td width="20%" align="center" style="padding:4px;"><a href="{link}?r=5" style="display:block;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-size:38px;line-height:44px;color:#f2b01e;" aria-label="5 stars">&#9733;</a></td></tr></table>
-<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 8px 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5f7076;">Rough</td><td align="right" style="padding:6px 8px 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5f7076;">Great</td></tr></table>
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td style="padding:4px 8px 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5f7076;">Rough</td><td align="right" style="padding:4px 8px 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;color:#5f7076;">Great</td></tr></table>
 </td></tr></table>
 </td></tr>
 
-<tr><td style="padding:10px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5f7076;">
-Three quick taps after the star. You'll get this once a week, skip any week you like.
+<tr><td style="padding:16px 28px 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#36474e;">
+If something went sideways, a dispatcher who went quiet or a short settlement, the next screen is where to say it. Three quick taps, about a minute.
 </td></tr>
 
-<tr><td style="padding:28px 32px 30px 32px;">
+<tr><td style="padding:24px 28px 26px 28px;">
 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
-<td style="border-top:3px solid #780601;padding-top:16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#16232a;">
-Driver team<br><span style="color:#5f7076;">Ari Logistics LLC</span>
+<td style="border-top:3px solid #780601;padding-top:14px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#16232a;">
+<strong>{sender_name}</strong><br><span style="color:#5f7076;">Ari Logistics LLC</span>
 </td>
 </tr></table>
 </td></tr>
@@ -57,8 +54,9 @@ Driver team<br><span style="color:#5f7076;">Ari Logistics LLC</span>
 </table>
 
 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;">
-<tr><td style="padding:16px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:17px;color:#5f7076;text-align:center;">
-You get this because you drive with Ari Logistics LLC.
+<tr><td style="padding:14px 28px 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#5f7076;text-align:center;">
+You get this once a week because you drive with Ari Logistics LLC.<br>
+<a href="{pause_link}" style="color:#5f7076;text-decoration:underline;">Pause for a month</a>
 </td></tr>
 </table>
 
