@@ -12,7 +12,7 @@
   Что страница берёт из GET /api/v1/review/{code}:
     company/short ← CompanySettings.organization_name      logo   ← CompanySettings.logo_url
     hero/done     ← DriverReviewSettings.page_hero_url       accent ← DriverReviewSettings.page_accent_color
-    google        ← google_review_url(CompanySettings.google_link), показываем 1 раз за всё время
+    google        ← google_review_url(CompanySettings.google_link), просим каждую неделю у всех, кто ответил
     dispatcher    ← последний диспетчер водителя в CargoETL   first_name ← Driver.first_name
     last_issue    ← что водитель отметил на прошлой неделе: pay | dispatcher | null
     lang          ← язык, который водитель выбрал в прошлый раз (en | es | ru)
@@ -77,6 +77,10 @@
   .google p { margin:0 0 14px; font-size:15px; }
   .gbtn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px; border-radius:12px; background:#fff; border:1.5px solid var(--line); color:var(--ink); font-weight:600; font-size:16px; text-decoration:none; }
   .gbtn .g { color:var(--star); font-size:18px; letter-spacing:1px; }
+  .google.quiet { background:none; padding:0; margin-top:28px; }
+  .google.quiet p[data-t="gText"], .google.quiet [data-t="gHelp"], .google.quiet .sugs { display:none; }
+  .google.quiet .gbtn { justify-content:flex-start; border:0; padding:0; font-weight:500; font-size:14px; color:var(--muted); }
+  .google.quiet .gbtn .g { font-size:13px; }
   .sugs { margin-top:8px; }
   .sugs .opt { background:#fff; border:1.5px dashed var(--line); font-weight:500; }
   .gnote { margin:10px 0 0 !important; font-size:13px !important; color:var(--muted); text-align:center; }
@@ -170,6 +174,7 @@
       <div class="co" id="co2"></div>
       <h1 data-t="doneTitle"></h1>
       <p class="sub" id="doneText"></p>
+      <p class="call" id="call" hidden><span data-t="call"></span> <a id="phone"></a></p>
       <div class="google" id="google" hidden>
         <p data-t="gText"></p>
         <a class="gbtn" id="glink" target="_blank" rel="noopener"><span class="g">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span data-t="gBtn"></span></a>
@@ -177,7 +182,6 @@
         <div class="opts wrap sugs" id="sugs"></div>
         <p class="gnote" id="copied" hidden></p>
       </div>
-      <p class="call" id="call" hidden><span data-t="call"></span> <a id="phone"></a></p>
       <div class="sign" data-t="sign"></div>
     </div>
   </section>
@@ -371,12 +375,14 @@ fetch('../companies.json', { cache: 'no-store' }).then(r => r.json()).then(list 
 
   $('send').addEventListener('click', () => {
     // Можно закончить в любой момент: что успел отметить, уже сохранено.
-    // Google зовём, только если неделя хорошая, у компании есть ссылка и водитель туда ещё не переходил.
     const stars = answers.company ? answers.company[0] : 0;
     happy = stars >= 4 && (answers.dispatcher || [''])[0] !== 'bad' && (answers.pay || [''])[0] !== 'late';
     $('form').style.display = 'none';
     $('done').style.display = 'block';
-    $('google').hidden = !(happy && c.google);
+    // Google просим каждую неделю у всех, кто ответил (правила Google не разрешают звать только довольных).
+    // После хорошей недели — карточка с подсказками, после плохой — тихая строка внизу.
+    $('google').hidden = !c.google;
+    $('google').classList.toggle('quiet', !happy);
     $('call').hidden = happy || !c.phone;
     render();
     window.scrollTo(0, 0);

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Portal · Driver check-ins</title>
+<!-- Прототип экранов HR-портала (tls.mycarrierlink.com) для еженедельной проверки водителей.
+     Вид повторяет портал: страница Setting с меню слева, карточки antd, синий #1677ff.
+     Данные выдуманные. Экраны: #settings, #editor, #reviews, #driver, #emails -->
+<style>
+  :root { --primary:#1677ff; --primary-bg:#e6f4ff; --primary-border:#91caff; --ink:rgba(0,0,0,.88); --text:rgba(0,0,0,.65); --muted:rgba(0,0,0,.45); --line:#f0f0f0; --border:#d9d9d9; --bg:#f5f5f5; --card:#fff; --green:#52c41a; --green-bg:#f6ffed; --red:#ff4d4f; --red-bg:#fff2f0; --gold:#faad14; --gold-bg:#fffbe6; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.5714 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  a { color:var(--primary); text-decoration:none; }
+  .topbar { height:56px; background:#fff; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:24px; padding:0 24px; position:sticky; top:0; z-index:5; }
+  .topbar .brand { display:flex; align-items:center; gap:10px; font-weight:600; }
+  .topbar .brand img { width:28px; height:28px; border-radius:6px; }
+  .topbar nav { display:flex; gap:4px; flex-wrap:wrap; }
+  .topbar nav a { color:var(--text); padding:6px 12px; border-radius:6px; }
+  .topbar nav a.on { color:var(--primary); background:var(--primary-bg); }
+  .proto { margin-left:auto; font-size:12px; color:#ad6800; background:var(--gold-bg); border:1px solid #ffe58f; padding:2px 8px; border-radius:4px; white-space:nowrap; }
+  .page { padding:24px; max-width:1600px; margin:0 auto; }
+  h1 { font-size:30px; line-height:1.27; font-weight:600; margin:0 0 4px; }
+  .subtitle { color:var(--text); margin:0 0 24px; }
+  .layout { display:flex; gap:24px; align-items:flex-start; }
+  .side { width:256px; flex-shrink:0; background:#fff; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.08); padding:8px; }
+  .side a { display:flex; align-items:center; gap:12px; padding:12px; border-radius:8px; color:#4b5563; font-weight:500; border:1px solid transparent; }
+  .side a.on { background:#dbeafe; color:#2563eb; border-color:#bfdbfe; }
+  .side a.on::after { content:""; width:8px; height:8px; border-radius:50%; background:#2563eb; margin-left:auto; }
+  .side .ic { width:18px; text-align:center; }
+  .main { flex:1; min-width:0; display:flex; flex-direction:column; gap:24px; }
+  .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+  .card-h { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:20px 24px 16px; border-bottom:1px solid #f3f4f6; }
+  .card-h h2 { font-size:20px; margin:0 0 2px; font-weight:600; }
+  .card-h p { margin:0; color:var(--muted); }
+  .card-b { padding:20px 24px; }
+  .row { display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-top:1px solid var(--line); }
+  .row:first-child { border-top:0; padding-top:0; }
+  .num { width:28px; height:28px; flex-shrink:0; border-radius:50%; background:var(--primary-bg); color:var(--primary); font-weight:600; display:flex; align-items:center; justify-content:center; }
+  .row .t { font-weight:600; }
+  .row .d { color:var(--muted); font-size:13px; margin-top:2px; }
+  .row .ctl { margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+  .grow { flex:1; min-width:0; }
+  .switch { width:44px; height:22px; border-radius:11px; background:rgba(0,0,0,.25); position:relative; cursor:pointer; flex-shrink:0; border:0; transition:background .2s; }
+  .switch::after { content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .2s; box-shadow:0 2px 4px rgba(0,35,11,.2); }
+  .switch[aria-checked="true"] { background:var(--primary); }
+  .switch[aria-checked="true"]::after { left:24px; }
+  select, input[type=text], input[type=time], input[type=number], textarea { font:inherit; color:var(--ink); border:1px solid var(--border); border-radius:6px; padding:4px 11px; background:#fff; height:32px; }
+  textarea { height:auto; padding:8px 11px; width:100%; }
+  input[type=text] { width:100%; }
+  .btn { font:inherit; border:1px solid var(--border); background:#fff; color:var(--ink); border-radius:6px; padding:4px 15px; height:32px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .btn.primary { background:var(--primary); border-color:var(--primary); color:#fff; box-shadow:0 2px 0 rgba(5,145,255,.1); }
+  .btn.link { border:0; background:none; color:var(--primary); padding:4px 6px; }
+  .btn.danger { color:var(--red); border-color:#ffccc7; }
+  .tag { display:inline-block; font-size:12px; line-height:20px; padding:0 7px; border-radius:4px; border:1px solid var(--border); background:#fafafa; color:var(--text); white-space:nowrap; }
+  .tag.blue { color:#0958d9; background:var(--primary-bg); border-color:var(--primary-border); }
+  .tag.green { color:#389e0d; background:var(--green-bg); border-color:#b7eb8f; }
+  .tag.red { color:#cf1322; background:var(--red-bg); border-color:#ffa39e; }
+  .tag.gold { color:#d48806; background:var(--gold-bg); border-color:#ffe58f; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field label { display:block; font-weight:500; margin-bottom:6px; }
+  .field .hint { color:var(--muted); font-size:12px; margin-top:4px; }
+  .alert { border-radius:8px; padding:9px 12px; border:1px solid var(--primary-border); background:var(--primary-bg); }
+  .alert.green { border-color:#b7eb8f; background:var(--green-bg); }
+  .alert.gold { border-color:#ffe58f; background:var(--gold-bg); }
+  .thumbs { display:flex; gap:12px; flex-wrap:wrap; }
+  .thumb { width:220px; }
+  .thumb img { width:220px; height:92px; object-fit:cover; border-radius:8px; border:1px solid #e5e7eb; display:block; }
+  .thumb span { font-size:12px; color:var(--muted); }
+  .swatch { width:32px; height:32px; border-radius:6px; border:1px solid var(--border); display:inline-block; vertical-align:middle; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .view { display:none; }
+  .view.on { display:block; }
+  /* editor */
+  .editor { display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:24px; }
+  .phone { width:390px; border:10px solid #1f1f1f; border-radius:36px; overflow:hidden; background:#fff; }
+  .phone iframe { width:370px; height:720px; border:0; display:block; }
+  .seg { display:inline-flex; background:#f5f5f5; border-radius:6px; padding:2px; }
+  .seg button { border:0; background:none; font:inherit; padding:3px 12px; border-radius:4px; cursor:pointer; color:var(--text); }
+  .seg button.on { background:#fff; color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.1); }
+  code.ph { background:#f5f5f5; border:1px solid var(--line); border-radius:4px; padding:1px 6px; font-size:12px; cursor:pointer; }
+  /* reviews */
+  .tabs { display:flex; gap:28px; border-bottom:1px solid var(--line); margin:0 0 16px; padding:0 4px; overflow-x:auto; }
+  .tabs a { padding:12px 0; color:var(--text); border-bottom:2px solid transparent; white-space:nowrap; }
+  .tabs a.on { color:var(--primary); border-color:var(--primary); }
+  .kpis { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px; }
+  .kpi { padding:16px 20px; }
+  .kpi .l { color:var(--muted); }
+  .kpi .n { font-size:28px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .kpi .s { font-size:13px; }
+  .up { color:#389e0d; } .down { color:#cf1322; }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; background:#fafafa; color:var(--ink); font-weight:600; padding:12px 16px; border-bottom:1px solid var(--line); }
+  td { padding:12px 16px; border-bottom:1px solid var(--line); vertical-align:top; font-variant-numeric:tabular-nums; }
+  tr:hover td { background:#fafafa; }
+  .stars { color:var(--gold); letter-spacing:1px; white-space:nowrap; }
+  .quote { color:var(--text); font-style:italic; margin-top:4px; }
+  .weeks { display:flex; gap:6px; }
+  .wk { width:30px; height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:#fff; }
+  .w5 { background:#389e0d; } .w4 { background:#73d13d; } .w3 { background:#faad14; } .w2 { background:#ff7a45; } .w1 { background:#cf1322; } .w0 { background:#e5e7eb; color:#9ca3af; }
+  .timeline { border-left:2px solid var(--line); margin-left:8px; padding-left:20px; }
+  .tl { position:relative; padding-bottom:18px; }
+  .tl::before { content:""; position:absolute; left:-27px; top:4px; width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--primary); }
+  .tl.bad::before { border-color:var(--red); }
+  .tl .when { color:var(--muted); font-size:12px; }
+  /* emails */
+  .mails { display:grid; grid-template-columns:repeat(auto-fill, minmax(330px, 1fr)); gap:20px; }
+  .mail { background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+  .mail .mh { padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; color:var(--text); }
+  .mail .mh b { color:var(--ink); }
+  .mail .mb { padding:16px; font-size:14px; }
+  .mail .mb .big { font-size:20px; font-weight:700; margin:0 0 6px; }
+  .mail .mb .st { color:#f2b01e; font-size:26px; letter-spacing:6px; margin:6px 0; }
+  .mail .who { font-size:12px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.4px; font-weight:600; }
+  @media (max-width:1100px) { .editor { grid-template-columns:1fr; } .layout { flex-direction:column; } .side { width:100%; display:flex; overflow-x:auto; } .side a { white-space:nowrap; } .kpis { grid-template-columns:1fr 1fr; } .grid2 { grid-template-columns:1fr; } }
+  @media (max-width:640px) { .page { padding:16px; } h1 { font-size:24px; } .row { flex-wrap:wrap; } .row .grow { flex:1 1 calc(100% - 44px); } .row .ctl { margin-left:44px; justify-content:flex-start; } .card-h { flex-direction:column; } .topbar { gap:10px; padding:0 12px; height:auto; min-height:56px; flex-wrap:wrap; } .topbar .brand span, .topbar .brand { font-size:0; } .topbar .brand img { font-size:14px; } .topbar nav { overflow-x:auto; flex-wrap:nowrap; padding:6px 0; } .topbar nav a { white-space:nowrap; } .proto { display:none; } .kpis { grid-template-columns:1fr 1fr; } table { display:block; overflow-x:auto; } .phone { width:100%; } .phone iframe { width:100%; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><img src="../img/tls/logo.jpg" alt="">Target Logistics Solution</div>
+  <nav>
+    <a href="#settings" data-nav="settings">Setting · Review</a>
+    <a href="#editor" data-nav="editor">Message editor</a>
+    <a href="#reviews" data-nav="reviews">Reviews</a>
+    <a href="#driver" data-nav="driver">Driver history</a>
+    <a href="#emails" data-nav="emails">All emails</a>
+  </nav>
+  <span class="proto">Prototype · sample data</span>
+</div>
+
+<!-- ============ SETTINGS ============ -->
+<div class="view page" id="v-settings">
+  <h1>Setting</h1>
+  <p class="subtitle">Manage your profile settings and preferences</p>
+  <div class="layout">
+    <div class="side">
+      <a><span class="ic">👤</span>Profile</a><a><span class="ic">👥</span>Users</a><a><span class="ic">📞</span>Contact Information</a>
+      <a><span class="ic">🔔</span>Notifications</a><a><span class="ic">🔌</span>Integrations</a><a><span class="ic">⤓</span>Import Data</a>
+      <a class="on"><span class="ic">★</span>Review</a>
+    </div>
+    <div class="main">
+
+      <div class="card">
+        <div class="card-h">
+          <div><h2>Driver check-ins</h2><p>A short email to every driver once a week, from your HR, with a link to a 1-minute page. Answers land in Reviews.</p></div>
+          <div class="ctl" style="display:flex;gap:8px;align-items:center"><button class="btn">Send test to me</button><button class="switch" role="switch" aria-checked="true" aria-label="Check-ins on"></button></div>
+        </div>
+        <div class="card-b">
+          <div class="alert green">On for 128 drivers with loads in CargoETL. Last sent Fri Oct 24, 4:00 PM · 46 answered (36%).</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div><h2>How it runs</h2><p>Each step can be turned off. Messages are ready to go, edit them only if you want.</p></div></div>
+        <div class="card-b">
+          <div class="row"><div class="num">1</div><div class="grow"><div class="t">First check-in</div><div class="d">After the driver's first load in CargoETL, on the next send day. Introduces you by name.</div></div>
+            <div class="ctl"><a href="#editor" class="btn link">Edit message</a><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">2</div><div class="grow"><div class="t">Weekly check-in</div><div class="d">Every week to drivers who had at least one load. Friday works best: settlement has just landed.</div></div>
+            <div class="ctl"><select aria-label="Day"><option>Friday</option><option>Thursday</option><option>Saturday</option><option>Monday</option></select><input type="time" value="16:00" aria-label="Time"><select aria-label="Timezone"><option>America/New_York</option><option>America/Chicago</option></select><a href="#editor" class="btn link">Edit message</a><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">3</div><div class="grow"><div class="t">Quiet week</div><div class="d">No loads this week: "Everything okay?" with 4 one-tap answers. "Want more loads" and "Thinking of leaving" go to Call today.</div></div>
+            <div class="ctl"><a href="#emails" class="btn link">Edit message</a><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">4</div><div class="grow"><div class="t">"Did we fix it?"</div><div class="d">If a driver complained last week, the next check-in starts with this question. Automatic.</div></div>
+            <div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">5</div><div class="grow"><div class="t">Bad answer alert</div><div class="d">1–2 stars, dispatcher "Not great", settlement "No" or "Thinking of leaving" → instant alert and a line in Call today. Reminder if nobody marks "Talked" in 24 h.</div></div>
+            <div class="ctl"><select aria-label="Alert to"><option>hazel@tlslogistics.us</option><option>All HR users</option></select><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">6</div><div class="grow"><div class="t">Google review ask</div><div class="d">On the thank-you screen, every week, to every driver who answered (Google does not allow asking only happy drivers). After a good week it comes with ready-to-copy lines built from the driver's own answers.</div></div>
+            <div class="ctl"><select aria-label="Google frequency"><option>Every week</option><option>Every 4 weeks</option><option>Once</option></select><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">7</div><div class="grow"><div class="t">Monday summary</div><div class="d">Who to call, dispatchers, what hurts, what got fixed. By email and on the Reviews page.</div></div>
+            <div class="ctl"><select aria-label="Summary day"><option>Monday</option><option>Friday evening</option></select><input type="time" value="09:00" aria-label="Summary time"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">8</div><div class="grow"><div class="t">Dispatcher summary</div><div class="d">Each dispatcher gets their own ratings with driver names, Monday morning. Free-text notes stay with HR.</div></div>
+            <div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">9</div><div class="grow"><div class="t">Don't wear drivers out</div><div class="d">No answer for 3 weeks → every 2 weeks. "Pause for a month" link in every email. Inactive units stop getting emails.</div></div>
+            <div class="ctl"><input type="number" value="3" min="1" style="width:64px" aria-label="Weeks"><span style="color:var(--muted)">weeks</span><button class="switch" role="switch" aria-checked="true"></button></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div><h2>Sender</h2><p>Drivers see a person, not a system. Replies go straight to your inbox.</p></div><button class="btn">Send test to me</button></div>
+        <div class="card-b">
+          <div class="grid2">
+            <div class="field"><label>Who signs the emails</label><input type="text" value="Hazel"><div class="hint">First name of the HR person drivers know</div></div>
+            <div class="field"><label>From name</label><input type="text" value="Hazel at TLS"><div class="hint">What drivers see in the inbox</div></div>
+            <div class="field"><label>Replies go to</label><input type="text" value="hazel@tlslogistics.us"></div>
+            <div class="field"><label>Phone in the signature</label><input type="text" value="(267) 494-6323"></div>
+          </div>
+          <div class="alert" style="margin-top:16px">Sent through <b>Resend</b> from <b>tls@mail.mycarrierlink.com</b> as <b>"Hazel at TLS"</b>. Works today, no setup needed.
+            <div style="margin-top:6px;color:var(--text)">Want it from <b>@tlslogistics.us</b>? Add 3 DNS records, we check them automatically. Status: <span class="tag red">not verified</span> <a href="#">Show records</a></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div><h2>Questions on the page</h2><p>One tap each, every tap is saved right away. Drivers pick EN / ES / RU.</p></div></div>
+        <div class="card-b">
+          <div class="row"><div class="num">★</div><div class="grow"><div class="t">This week with TLS</div><div class="d">Stars from the email, already saved when the page opens</div></div><div class="ctl"><span class="tag">always on</span></div></div>
+          <div class="row"><div class="num">?</div><div class="grow"><div class="t">{dispatcher}, your dispatcher, this week?</div><div class="d">Great · Okay · Not great — "Kevin sees your answer"</div></div><div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">$</div><div class="grow"><div class="t">Did your settlement come in right?</div><div class="d">Yes · Almost · No</div></div><div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">✓</div><div class="grow"><div class="t">What would make next week better?</div>
+            <div class="chips" style="margin-top:6px"><span class="tag">Better rates</span><span class="tag">More loads</span><span class="tag">Less waiting</span><span class="tag">Faster pay</span><span class="tag">Home time</span><span class="tag">Paperwork help</span><span class="tag">The app</span><span class="tag">Nothing, keep it up</span><a class="btn link">+ Add</a></div></div>
+            <div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div class="row"><div class="num">✎</div><div class="grow"><div class="t">Anything else?</div><div class="d">Free text, only HR sees it</div></div><div class="ctl"><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          <div style="margin-top:8px"><a href="../page/index.html?c=tls&r=4" target="_blank" class="btn">Open the driver page ↗</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div><h2>Look</h2><p>Made for your company. Change only if you want.</p></div></div>
+        <div class="card-b">
+          <div class="thumbs">
+            <div class="thumb"><img src="../img/tls/hero.jpg" alt=""><span>Email and page header</span> <a class="btn link">Change</a></div>
+            <div class="thumb"><img src="../img/tls/done.jpg" alt=""><span>Thank-you screen</span> <a class="btn link">Change</a></div>
+            <div class="thumb"><div style="height:92px;display:flex;align-items:center;gap:10px"><span class="swatch" style="background:#2a8371"></span><input type="text" value="#2a8371" style="width:110px"></div><span>Button color</span></div>
+          </div>
+          <div class="field" style="margin-top:16px"><label>Google review link</label><input type="text" value="https://www.google.com/maps/place/Target+Logistics+Solution+LLC/@40.18…">
+            <div class="hint"><span class="tag green">✓ opens straight to the rating window</span> Target Logistics Solution LLC, 780 E Street Rd</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ EDITOR ============ -->
+<div class="view page" id="v-editor">
+  <h1>Weekly check-in · message</h1>
+  <p class="subtitle"><a href="#settings">← Setting · Review</a></p>
+  <div class="editor">
+    <div class="main">
+      <div class="card"><div class="card-b">
+        <div class="field"><label>Subject (rotates every week)</label>
+          <input type="text" value="{first_name}, how was the week?" style="margin-bottom:6px"><input type="text" value="Quick one, {first_name}" style="margin-bottom:6px"><input type="text" value="How'd the week go, {first_name}?"><a class="btn link">+ Add subject</a></div>
+        <div class="field" style="margin-top:12px"><label>Preview line</label><input type="text" value="Tap a star. If something's off, I want to know."></div>
+        <div class="field" style="margin-top:12px"><label style="display:flex;justify-content:space-between;align-items:center">Email <span class="seg"><button class="on">Visual</button><button>HTML</button></span></label>
+          <div style="border:1px solid var(--border);border-radius:8px;padding:14px;line-height:1.7">
+            <b>Hey {first_name}, how was this week?</b><br>One tap is enough.<br><span style="color:#f2b01e;font-size:20px;letter-spacing:4px">★★★★★</span><br>
+            Short settlement, a dispatcher who went quiet, too long sitting empty — if anything's off, tell me on the next screen and I'll look into it.<br><br>
+            Rather say it just to me? Reply to this email.<br><br>{sender_name}<br>Driver team, Target Logistics Solution LLC</div>
+          <div class="hint" style="margin-top:8px">Right-click to insert: <code class="ph">{first_name}</code> <code class="ph">{sender_name}</code> <code class="ph">{link}</code> <code class="ph">{dispatcher}</code> <code class="ph">{pause_link}</code></div></div>
+        <div style="display:flex;gap:8px;margin-top:16px"><button class="btn primary">Save</button><button class="btn">Send test to me</button><button class="btn">Reset to default</button></div>
+      </div></div>
+    </div>
+    <div><div class="phone"><iframe src="../tls/preview.html" title="Email preview"></iframe></div><p style="color:var(--muted);text-align:center">Preview with sample driver Marcus</p></div>
+  </div>
+</div>
+
+<!-- ============ REVIEWS ============ -->
+<div class="view page" id="v-reviews">
+  <h1>Reviews</h1>
+  <p class="subtitle">Week of Oct 27 – Nov 2 · updates as drivers answer</p>
+  <div class="tabs"><a class="on">This week</a><a>Call today <span class="tag red">3</span></a><a>Drivers</a><a>Dispatchers</a><a>SMS reviews</a><a>App ratings</a></div>
+  <div class="kpis">
+    <div class="card kpi"><div class="l">Answered</div><div class="n">46 / 128</div><div class="s up">36% · ▲ 4 pts</div></div>
+    <div class="card kpi"><div class="l">Week rating</div><div class="n">4.3 ★</div><div class="s up">▲ 0.2</div></div>
+    <div class="card kpi" style="border-color:#ffccc7;background:#fff2f0"><div class="l">Call today</div><div class="n" style="color:#cf1322">3</div><div class="s">bad week or short settlement</div></div>
+    <div class="card kpi"><div class="l">Fixed after complaint</div><div class="n">4 / 6</div><div class="s">drivers' own answers</div></div>
+  </div>
+  <div class="card" style="margin-top:24px">
+    <div class="card-h"><div><h2>Call today</h2><p>Alert went out right after each answer. Mark "Talked" after the call.</p></div></div>
+    <table>
+      <thead><tr><th>Driver</th><th>This week</th><th>What they said</th><th>Dispatcher</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><a href="#driver">Luis Ortega</a><div class="quote" style="font-style:normal"><span class="tag gold">2nd bad week</span></div></td><td><span class="stars">★★☆☆☆</span></td><td><span class="tag red">Settlement: No</span> <span class="tag red">Dispatcher: Not great</span><div class="quote">"Settlement came $180 short, Robert hasn't picked up since Thursday"</div></td><td>Robert Paul</td><td><button class="btn primary">Call</button> <button class="btn">Talked</button></td></tr>
+        <tr><td><a href="#driver">Marcus Hill</a></td><td><span class="stars">★★★☆☆</span></td><td><span class="tag red">Settlement: No</span> <span class="tag">Fix: Faster pay</span></td><td>Kevin Smith</td><td><button class="btn primary">Call</button> <button class="btn">Talked</button></td></tr>
+        <tr><td><a href="#driver">Dmitri Volkov</a></td><td><span class="tag gold">Quiet week</span></td><td><span class="tag red">Thinking of leaving</span><div class="quote">"Third week sitting two days without a load"</div></td><td>Robert Paul</td><td><button class="btn primary">Call</button> <button class="btn">Talked</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2" style="margin-top:24px">
+    <div class="card">
+      <div class="card-h"><div><h2>Dispatchers</h2><p>Each one gets their own ratings with names on Monday</p></div></div>
+      <table><thead><tr><th>Dispatcher</th><th>Answers</th><th>Great</th><th>Not great</th><th>vs last</th></tr></thead><tbody>
+        <tr><td>Robert Paul <span class="tag red">watch</span></td><td>9</td><td>33%</td><td>4</td><td class="down">▼</td></tr>
+        <tr><td>Kevin Smith</td><td>11</td><td>82%</td><td>0</td><td class="up">▲</td></tr>
+        <tr><td>Veronica Collins</td><td>8</td><td>88%</td><td>0</td><td>=</td></tr>
+        <tr><td>Chris Martin</td><td>7</td><td>71%</td><td>1</td><td>=</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="card-h"><div><h2>What would make next week better</h2><p>Tapped this week</p></div></div>
+      <div class="card-b">
+        <div style="display:grid;grid-template-columns:130px 1fr 28px;gap:8px 10px;align-items:center">
+          <span>Faster pay</span><span style="height:10px;border-radius:5px;background:#1677ff;width:100%"></span><b>9</b>
+          <span>Better rates</span><span style="height:10px;border-radius:5px;background:#1677ff;width:67%"></span><b>6</b>
+          <span>More loads</span><span style="height:10px;border-radius:5px;background:#1677ff;width:56%"></span><b>5</b>
+          <span>Less waiting</span><span style="height:10px;border-radius:5px;background:#1677ff;width:44%"></span><b>4</b>
+          <span>Home time</span><span style="height:10px;border-radius:5px;background:#1677ff;width:22%"></span><b>2</b>
+          <span>Nothing, keep it up</span><span style="height:10px;border-radius:5px;background:#95de64;width:100%"></span><b>19</b>
+        </div>
+        <div style="margin-top:16px;color:var(--muted)">Google: asked 46 · opened 12 this week</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DRIVER ============ -->
+<div class="view page" id="v-driver">
+  <h1>Luis Ortega</h1>
+  <p class="subtitle">Unit 2041 · Sprinter · with TLS since Aug 12 · dispatcher Robert Paul · prefers ES</p>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-h"><div><h2>Last 10 weeks</h2><p>Stars per week, grey = no answer</p></div></div>
+      <div class="card-b">
+        <div class="weeks"><span class="wk w5">5</span><span class="wk w5">5</span><span class="wk w4">4</span><span class="wk w0">–</span><span class="wk w4">4</span><span class="wk w5">5</span><span class="wk w3">3</span><span class="wk w4">4</span><span class="wk w2">2</span><span class="wk w2">2</span></div>
+        <div style="margin-top:14px" class="alert gold">Was 4–5 stars all summer, dropped after dispatcher changed to Robert Paul (Oct 13).</div>
+        <div style="margin-top:14px;color:var(--muted)">Google: opened once (Sep 5)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div><h2>History</h2></div></div>
+      <div class="card-b"><div class="timeline">
+        <div class="tl bad"><div class="when">Fri Oct 31 · 2 ★</div>Settlement: No · Dispatcher: Not great · "Did we fix it?" → Not yet<div class="quote">"Settlement came $180 short, Robert hasn't picked up since Thursday"</div><span class="tag red">In Call today</span></div>
+        <div class="tl"><div class="when">Mon Oct 27 · Hazel</div>Talked: payroll confirmed $180 missing, to be paid with next settlement</div>
+        <div class="tl bad"><div class="when">Fri Oct 24 · 2 ★</div>Settlement: No · Fix: Faster pay</div>
+        <div class="tl"><div class="when">Fri Oct 17 · 4 ★</div>Dispatcher: Okay · Settlement: Yes</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EMAILS ============ -->
+<div class="view page" id="v-emails">
+  <h1>All emails</h1>
+  <p class="subtitle">Everything the system sends, to whom and when. Driver emails go from "Hazel at TLS" through Resend; replies go to Hazel.</p>
+  <div class="mails">
+    <div class="mail"><div class="mh"><div class="who">Driver · after first load</div>From <b>Hazel at TLS</b> · <b>Marcus, first week done</b></div><div class="mb"><div class="big">How did your first week go?</div>Hazel here. I'm the one at TLS who looks after our drivers. You made it through your first week with us, so let me ask:<div class="st">★★★★★</div>If anything was off — a load, your dispatcher, your pay — tell me and I'll sort it out. I'll check in like this every Friday.</div></div>
+    <div class="mail"><div class="mh"><div class="who">Driver · every Friday 4 PM</div>From <b>Hazel at TLS</b> · <b>Marcus, how was the week?</b></div><div class="mb"><div class="big">Hey Marcus, how was this week?</div>One tap is enough.<div class="st">★★★★★</div>Short settlement, a dispatcher who went quiet, too long sitting empty — tell me and I'll look into it. Rather say it just to me? Reply to this email.<br><a href="../tls/preview.html" target="_blank">Open full email ↗</a></div></div>
+    <div class="mail"><div class="mh"><div class="who">Driver · week without loads</div>From <b>Hazel at TLS</b> · <b>Marcus, quiet week?</b></div><div class="mb"><div class="big">Quiet week?</div>I see no loads on your truck this week. Everything okay?<div class="chips" style="margin-top:10px"><span class="tag">Taking time off</span><span class="tag">Truck in the shop</span><span class="tag blue">Want more loads</span><span class="tag red">Thinking of leaving</span></div></div></div>
+    <div class="mail"><div class="mh"><div class="who">HR · right after a bad answer</div>To <b>hazel@tlslogistics.us</b> · <b>Call Luis Ortega today: 2★, settlement short</b></div><div class="mb">Luis answered his check-in 4 min ago.<div style="margin:8px 0" class="chips"><span class="tag red">Settlement: No</span><span class="tag red">Dispatcher: Not great</span><span class="tag gold">2nd bad week</span></div><div class="quote">"Settlement came $180 short, Robert hasn't picked up since Thursday"</div><div style="margin-top:10px"><span class="btn primary">Call Luis</span> <span class="btn">Open in portal</span></div><div style="margin-top:8px;color:var(--muted);font-size:12px">We told Luis you'll call by tomorrow.</div></div></div>
+    <div class="mail"><div class="mh"><div class="who">HR · Monday 9 AM</div>To <b>HR team</b> · <b>TLS drivers this week: 46 answered, 3 to call</b></div><div class="mb">4.3 ★ (▲0.2) · 36% answered · 4 of 6 complaints fixed<br><br><b>Call today:</b> Luis Ortega, Marcus Hill, Dmitri Volkov<br><b>Watch:</b> Robert Paul — 4 "Not great"<br><b>Top ask:</b> Faster pay (9)<br><br><a href="#reviews">Open Reviews ↗</a></div></div>
+    <div class="mail"><div class="mh"><div class="who">Dispatcher · Monday 9 AM</div>To <b>Kevin Smith</b> · <b>Your drivers this week: 9 great, 2 okay</b></div><div class="mb">Andre B. — Great<br>Sam K. — Great<br>Marcus H. — Okay<br>… 8 more<br><br><span class="quote">Drivers also tapped: "Faster pay" (3), "More loads" (2)</span></div></div>
+  </div>
+</div>
+
+<script>
+function show() {
+  const v = (location.hash || '#settings').slice(1);
+  document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.id === 'v-' + v));
+  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === v));
+  window.scrollTo(0, 0);
+}
+addEventListener('hashchange', show); show();
+document.querySelectorAll('.switch').forEach(s => s.addEventListener('click', () => s.setAttribute('aria-checked', s.getAttribute('aria-checked') !== 'true')));
+document.querySelectorAll('.seg').forEach(g => g.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { g.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); })));
+</script>
+</body>
+</html>
