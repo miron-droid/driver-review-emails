@@ -14,8 +14,8 @@
    "dispatcher": "Kevin Smith"
   },
   "logo_mail": "img/adit/logo-mail.png",
-  "logo_mail_w": 51,
-  "logo_mail_h": 40,
+  "logo_mail_w": 82,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -33,8 +33,8 @@
    "dispatcher": "Robert Paul"
   },
   "logo_mail": "img/aldis/logo-mail.png",
-  "logo_mail_w": 118,
-  "logo_mail_h": 40,
+  "logo_mail_w": 130,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -52,8 +52,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/alliancelogistics/logo-mail.png",
-  "logo_mail_w": 39,
-  "logo_mail_h": 40,
+  "logo_mail_w": 63,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -71,8 +71,8 @@
    "dispatcher": "Chris Martin"
   },
   "logo_mail": "img/annlogistics/logo-mail.png",
-  "logo_mail_w": 52,
-  "logo_mail_h": 40,
+  "logo_mail_w": 83,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -90,8 +90,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/arilogistics/logo-mail.png",
-  "logo_mail_w": 73,
-  "logo_mail_h": 40,
+  "logo_mail_w": 80,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -109,8 +109,8 @@
    "dispatcher": "Ryan Carter"
   },
   "logo_mail": "img/athena/logo-mail.png",
-  "logo_mail_w": 26,
-  "logo_mail_h": 40,
+  "logo_mail_w": 41,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -128,8 +128,8 @@
    "dispatcher": "Paul Bennett"
   },
   "logo_mail": "img/atlas/logo-mail.png",
-  "logo_mail_w": 40,
-  "logo_mail_h": 40,
+  "logo_mail_w": 64,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -147,8 +147,8 @@
    "dispatcher": "Veronica Collins"
   },
   "logo_mail": "img/cnulogistics/logo-mail.png",
-  "logo_mail_w": 31,
-  "logo_mail_h": 40,
+  "logo_mail_w": 50,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -166,8 +166,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/jrtrans/logo-mail.png",
-  "logo_mail_w": 68,
-  "logo_mail_h": 40,
+  "logo_mail_w": 75,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -185,8 +185,8 @@
    "dispatcher": "Mark Lee"
   },
   "logo_mail": "img/logisticssystemsllc/logo-mail.png",
-  "logo_mail_w": 39,
-  "logo_mail_h": 40,
+  "logo_mail_w": 62,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -204,8 +204,8 @@
    "dispatcher": "Anna Price"
   },
   "logo_mail": "img/odyssey/logo-mail.png",
-  "logo_mail_w": 63,
-  "logo_mail_h": 40,
+  "logo_mail_w": 100,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -223,8 +223,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/pennlogisticsllc/logo-mail.png",
-  "logo_mail_w": 42,
-  "logo_mail_h": 40,
+  "logo_mail_w": 68,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -242,8 +242,8 @@
    "dispatcher": "Tom Hayes"
   },
   "logo_mail": "img/redmax/logo-mail.png",
-  "logo_mail_w": 143,
-  "logo_mail_h": 40,
+  "logo_mail_w": 157,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -261,8 +261,8 @@
    "dispatcher": "Dana Brooks"
   },
   "logo_mail": "img/rulinglogistics/logo-mail.png",
-  "logo_mail_w": 39,
-  "logo_mail_h": 40,
+  "logo_mail_w": 63,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -280,8 +280,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/shiftlinetransit/logo-mail.png",
-  "logo_mail_w": 43,
-  "logo_mail_h": 40,
+  "logo_mail_w": 69,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -299,8 +299,8 @@
    "dispatcher": "Lisa Grant"
   },
   "logo_mail": "img/skybridgels/logo-mail.png",
-  "logo_mail_w": 60,
-  "logo_mail_h": 40,
+  "logo_mail_w": 96,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -318,8 +318,8 @@
    "dispatcher": "Alex Moore"
   },
   "logo_mail": "img/tl/logo-mail.png",
-  "logo_mail_w": 40,
-  "logo_mail_h": 40,
+  "logo_mail_w": 64,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -337,8 +337,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/tls/logo-mail.png",
-  "logo_mail_w": 37,
-  "logo_mail_h": 40,
+  "logo_mail_w": 59,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?",
   "phone": "+12674946323",
   "phone_text": "(267) 494-6323",
@@ -359,8 +359,8 @@
    "dispatcher": "Nina Ford"
   },
   "logo_mail": "img/ursaexpress/logo-mail.png",
-  "logo_mail_w": 103,
-  "logo_mail_h": 40,
+  "logo_mail_w": 113,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -378,8 +378,8 @@
    "dispatcher": "Sean Ward"
   },
   "logo_mail": "img/vertexexpedite/logo-mail.png",
-  "logo_mail_w": 55,
-  "logo_mail_h": 40,
+  "logo_mail_w": 88,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -397,8 +397,8 @@
    "dispatcher": null
   },
   "logo_mail": "img/vertextransportation/logo-mail.png",
-  "logo_mail_w": 52,
-  "logo_mail_h": 40,
+  "logo_mail_w": 83,
+  "logo_mail_h": 64,
   "subject": "{first_name}, how was your week?"
  },
  {
@@ -416,8 +416,8 @@
    "dispatcher": "Kate Bell"
   },
   "logo_mail": "img/zubrfreight/logo-mail.png",
-  "logo_mail_w": 121,
-  "logo_mail_h": 40,
+  "logo_mail_w": 133,
+  "logo_mail_h": 44,
   "subject": "{first_name}, how was your week?"
  }
 ]
