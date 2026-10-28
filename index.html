@@ -49,7 +49,8 @@
 const toast = (t) => { const el = document.getElementById('toast'); el.textContent = t; el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 1800); };
 const fit = (f) => { try { f.style.height = f.contentDocument.documentElement.scrollHeight + 'px'; } catch (e) {} };
 const esc = (s) => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-fetch('companies.json').then(r => r.json()).then(list => {
+const V = Date.now();
+fetch('companies.json?v=' + V, { cache: 'no-store' }).then(r => r.json()).then(list => {
   document.getElementById('list').innerHTML = list.map(c => `
     <section class="company" id="${c.id}">
       <div class="head">
@@ -58,19 +59,19 @@ fetch('companies.json').then(r => r.json()).then(list => {
           <div class="meta">Тема: <b>${esc(c.subject)}</b> · портал ${esc(c.portal)}</div>
         </div>
         <div class="btns">
-          <button class="btn" data-copy="${c.id}/template.html">Скопировать HTML</button>
-          <a class="btn ghost" href="${c.id}/template.html" target="_blank" rel="noopener">Шаблон</a>
-          <a class="btn ghost" href="${c.id}/preview.html" target="_blank" rel="noopener">Открыть письмо</a>
-          <a class="btn ghost" href="${c.id}/page.html?r=5" target="_blank" rel="noopener">Страница опроса</a>
+          <button class="btn" data-copy="${c.id}/template.html?v=${V}">Скопировать HTML</button>
+          <a class="btn ghost" href="${c.id}/template.html?v=${V}" target="_blank" rel="noopener">Шаблон</a>
+          <a class="btn ghost" href="${c.id}/preview.html?v=${V}" target="_blank" rel="noopener">Открыть письмо</a>
+          <a class="btn ghost" href="${c.id}/page.html?r=5&v=${V}" target="_blank" rel="noopener">Страница опроса</a>
         </div>
       </div>
       <div class="views">
-        <div class="frame desk"><div class="label">Компьютер, 600px</div><iframe src="${c.id}/preview.html" title="${esc(c.name)}, компьютер" onload="fit(this)"></iframe></div>
-        <div class="phone"><div class="frame"><iframe src="${c.id}/preview.html" title="${esc(c.name)}, телефон" onload="fit(this)"></iframe></div></div>
+        <div class="frame desk"><div class="label">Компьютер, 600px</div><iframe src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, компьютер" onload="fit(this)"></iframe></div>
+        <div class="phone"><div class="frame"><iframe src="${c.id}/preview.html?v=${V}" title="${esc(c.name)}, телефон" onload="fit(this)"></iframe></div></div>
       </div>
     </section>`).join('');
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-    try { const html = await (await fetch(b.dataset.copy)).text(); await navigator.clipboard.writeText(html); toast('HTML скопирован'); }
+    try { const html = await (await fetch(b.dataset.copy, { cache: 'no-store' })).text(); await navigator.clipboard.writeText(html); toast('HTML скопирован'); }
     catch (e) { toast('Не скопировалось, откройте «Шаблон»'); }
   }));
 });
