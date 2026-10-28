@@ -38,7 +38,7 @@
 <body>
 <div class="wrap">
   <h1>Письма-отзывы водителям</h1>
-  <p class="lead">У каждой компании свой шаблон письма «как вам у нас работается». HTML копируется в настройки отзывов HR-портала (поле Email template, задача HRP-1213). В предпросмотре выдуманные данные. Звёзды в письме ведут на прототип страницы опроса.</p>
+  <p class="lead">У каждой компании свой шаблон письма «как вам у нас работается». HTML копируется в настройки отзывов HR-портала (поле Email template, задача HRP-1213). В предпросмотре выдуманные данные. Звёзды в письме ведут на <a href="page/index.html?c=tls">общую страницу опроса</a>: одна на все компании, название, логотип, цвет и ссылка Google подставляются из настроек компании.</p>
   <div class="ph" aria-label="Плейсхолдеры">
     <code>{first_name}</code><code>{name}</code><code>{company}</code><code>{link}</code><code>{loads}</code><code>{logo_url}</code>
   </div>
@@ -62,7 +62,7 @@ fetch('companies.json?v=' + V, { cache: 'no-store' }).then(r => r.json()).then(l
           <button class="btn" data-copy="${c.id}/template.html?v=${V}">Скопировать HTML</button>
           <a class="btn ghost" href="${c.id}/template.html?v=${V}" target="_blank" rel="noopener">Шаблон</a>
           <a class="btn ghost" href="${c.id}/preview.html?v=${V}" target="_blank" rel="noopener">Открыть письмо</a>
-          <a class="btn ghost" href="${c.id}/page.html?r=5&v=${V}" target="_blank" rel="noopener">Страница опроса</a>
+          <a class="btn ghost" href="page/index.html?c=${c.id}&r=5&v=${V}" target="_blank" rel="noopener">Страница опроса</a>
         </div>
       </div>
       <div class="views">
